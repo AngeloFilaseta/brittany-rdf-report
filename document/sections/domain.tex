@@ -2,6 +2,9 @@
 
 \subsection{Scope del progetto}
 
+Brittany è un sistema di serre il cui scopo è automatizzare il più possibile i processi di crescita di alcune piante. Il sistema è composto da dispositivi edge che monitorano la situazione delle piante e dell'ambiente circostante (tramite sensori) ed eventualmente vi agiscono (tramite attuatori). Ogni edge dispone di funzionalità che dipendono dall'hardware a cui essi sono collegati.
+I dati che vengono campionati vengono raccolti in una base di dati. Gli utenti possono configurare le serre in base alle loro esigenze, visionare la situazione in un qualsiasi momento e possono essere avvisati in caso di situazioni anomale.
+
 \subsection{Descrizione ad alto livello del sistema}
 Brittany è un sistema suddiviso in micro servizi:
 \begin{itemize}
@@ -16,7 +19,8 @@ Greenhouse core deve necessariamente essere collocato nella stessa rete LAN in c
 
 \centeredImage{img/architecture.png}{Architettura del sistema "Brittany"}{0.7}
 
-\noindent La parte del dominio che è interessante da rappresentare e formalizzare è quella inerente ai dispositivi di tipo "Edge", ossia la parte più Core dell'intero sistema. \newline
+\subsubsection{Parte del dominio presa in considerazione per Brittany RDF}
+\noindent La parte del dominio che è interessante da rappresentare e formalizzare è quella inerente ai dispositivi di tipo "Edge". Si tratta della parte del sistema più Core e dunque più ricca di concetti. \newline
 Anche i parametri di configurazione di cui si occupa "Settings Service" sarebbero stati interessanti, ma sono già stati modellati accuratamente utilizzando altre tecnologie e sono stati quindi per ora esclusi.
 
 \centeredImage{img/represent.png}{Parte del sistema "Brittany" presa in considerazione per il progetto corrente}{0.7}
