@@ -19,30 +19,82 @@ Viene di seguito illustrato come è stato definito l’Ubiquitous Language utili
 
 \noindent Il dominio è stato modellato utilizzando l'Ubiquitous Language appena illustrato. Sono stati inoltre ovviamente aggiunti elementi più di dettaglio e di basso livello, come le classi e le proprietà che fanno parte delle gerarchie "is a", più specifiche e per ora ancora mai nominate.
 \subsubsection{Concetti (Classi)}
-Seguono gli identificatori delle classi utilizzate. Vengono riportate alcune note importanti. Dettagli più accurati ed approfonditi sono riportati nel file RDF \textit{brittany.ttl}.
+Seguono gli identificatori delle classi utilizzate. Vengono riportate alcune note importanti. Dettagli più accurati ed approfonditi sono riportati nel file RDF \textit{brittany.ttl}:
 
-\paragraph{\#Greenhouse}
-\paragraph{\#Monitorable}
-\paragraph{\#Environment}
-\paragraph{\#Plant}
-\paragraph{\#Edge}
-\paragraph{\#Module}
-\paragraph{\#ComponentModule}
-\paragraph{\#DigitalLightModule}
-\paragraph{\#OperationHandler}
-\paragraph{\#ComponentOperationHandler}
-\paragraph{\#ActionOperationHandler}
-\paragraph{\#PropertyOperationHandler}
-\paragraph{\#DigitalLightHandler}
-\paragraph{\#IsOnDigitalLightHandler}
-\paragraph{\#TurnOnDigitalLightHandler}
-\paragraph{\#TurnOffDigitalLightHandler}
-\paragraph{\#ComponentHw}
-\paragraph{\#SensorHw}
-\paragraph{\#ActuatorHw}
-\paragraph{\#DigitalLightHw}
+\paragraph{<\#Greenhouse>}
+Utilizzato per modellare il concetto di Serra.
+\paragraph{<\#Monitorable>}
+Utilizzato per modellare il concetto di un "qualcosa" che può essere controllato da una classe di tipo <\#Edge>. <\#Environment> e <\#Plant> sono sottoclassi di questa classe.
+\paragraph{<\#Environment>}
+Utilizzato per modellare il concetto di Ambiente.
+\paragraph{<\#Plant>}
+Utilizzato per modellare il concetto di Pianta.
+\paragraph{<\#Edge>}
+Utilizzato per modellare il concetto di Edge.
+\paragraph{<\#Module>}
+Utilizzato per modellare il concetto di Modulo.
+\paragraph{<\#ComponentModule>}
+Si tratta di una specializzazione di Module che agisce necessariamente su dei componenti hardware (\#ComponentHw).
+\paragraph{<\#DigitalLightModule>}
+Una specializzazione di <\#ComponentModule> che si occupa del sistema di illuminazione.
+\paragraph{<\#OperationHandler>}
+Utilizzato per modellare il concetto di Operation Handler.
+\paragraph{<\#ComponentOperationHandler>}
+Specializzazione di <\#OperationHandler> che agisce necessariamente su dei componenti hardware (<\#ComponentHw>).
+\paragraph{<\#ActionOperationHandler>}
+Specializzazione di <\#OperationHandler> utilizzata per definire un'operazione che effettua un'azione.
+\paragraph{<\#PropertyOperationHandler>}
+Specializzazione di <\#OperationHandler> utilizzata per definire un'operazione che ricava una proprietà.
+\paragraph{<\#DigitalLightHandler>}
+Specializzazione di <\#ComponentOperationHandler> per definire operazioni legate al sistema di illuminazione.
+\paragraph{<\#IsOnDigitalLightHandler>}
+Specializzazione di <\#DigitalLightHandler> e di <\#PropertyOperationHandler>. L'operazione si occupa di verificare se un determinato componente che fa parte del sistema di illuminazione è acceso.
+\paragraph{<\#TurnOnDigitalLightHandler>}
+Specializzazione di <\#DigitalLightHandler> e di \#PropertyOperationHandler. L'operazione si occupa di accendere un determinato componente che fa parte del sistema di illuminazione.
+\paragraph{<\#TurnOffDigitalLightHandler>}
+Specializzazione di <\#DigitalLightHandler> e di \#PropertyOperationHandler. L'operazione si occupa di spegnere un determinato componente che fa parte del sistema di illuminazione.
+\paragraph{<\#ComponentHw>}
+Utilizzato per modellare il concetto di Componente Hardware.
+\paragraph{<\#SensorHw>}
+Specializzazione di <\#ComponentHw>. Un componente che ricava dati dall'area circostante.
+\paragraph{<\#ActuatorHw>}
+Specializzazione di <\#ComponentHw>. Un componente che agisce sull'area circostante.
+\paragraph{<\#DigitalLightHw>}
+Specializzazione di <\#ActuatorHw>. Un attuatore che si occupa del sistema di illuminazione.
 
 \subsubsection{Relazioni (Proprietà)}
+Seguono gli identificatori delle proprietà utilizzate. Vengono riportate alcune note importanti. Dettagli più accurati ed approfonditi sono riportati nel file RDF \textit{brittany.ttl}:
+
+\paragraph{<\#hasEnvironments>}
+Proprietà utilizzata per modellare il fatto che esistono più <\#Environment> (almeno uno) all'interno di un <\#Greenhouse>.
+\paragraph{<\#hasPlants>}
+Proprietà utilizzata per modellare il fatto che esistono più <\#Plant> all'interno di un <\#Environment>.
+\paragraph{<\#monitor>}
+Proprietà utilizzata per modellare il fatto che un <\#Edge> può essere posto in un qualsiasi <\#Monitorable>.
+\paragraph{<\#monitorPlant>}
+Specializzazione di <\#monitor> dedicata al monitor di un <\#Plant>.
+\paragraph{<\#monitorEnvironment>}
+Specializzazione di <\#monitor> dedicata al monitor di una <\#Environment>.
+\paragraph{<\#hasComponents>}
+Proprietà utilizzata per modellare il fatto che esistono più <\#ComponentHw> (almeno uno) all'interno di un <\#ComponentModule>.
+\paragraph{<\#hasModules>}
+Proprietà utilizzata per modellare il fatto che esistono più <\#Module> (almeno uno) all'interno di un <\#Edge>.
+\paragraph{<\#edgeName>}
+Specializzazione di foaf:name utilizzata per dare un nome ad un <\#Edge>.
+\paragraph{<\#moduleName>}
+Specializzazione di foaf:name utilizzata per dare un nome ad un <\#Module>.
+\paragraph{<\#handlerName>}
+Specializzazione di foaf:name utilizzata per dare un nome ad un <\#Handler>.
+\paragraph{<\#componentName>}
+Specializzazione di foaf:name utilizzata per dare un nome ad un <\#ComponentHw>.
+\paragraph{<\#hasHandlers>}
+Proprietà utilizzata per modellare il fatto che esistono più <\#OperationHandler> (almeno uno) all'interno di un <\#Module>.
+\paragraph{<\#hasHandlerOutputType>}
+Proprietà utilizzata per definire il tipo di output fornito da un <\#OperationHandler>.
+\paragraph{<\#hasHandlerInputSchema>}
+Proprietà utilizzata per definire quali tipi di dati possono essere forniti in input ad un <\#OperationHandler>.
+\paragraph{<\#hasThingDescriptor>}
+Proprietà utilizzata per legare un <\#Edge> al suo Thing Descriptor (td:Thing).
 
 \subsubsection{Individui}
 
