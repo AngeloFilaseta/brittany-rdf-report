@@ -1,5 +1,35 @@
 \section{Quality Assurance}
+In questa sezione vengono descritti alcuni strumenti utilizzati per il controllo della qualità del progetto.
 
 \subsection{Pre-commit hooks}
+I Git hook sono script che vengono eseguiti per identificare potenziali problemi (funzionali o stilistici) all'interno di file sorgenti prima che vengano versionati.\newline
+
+\noindent Per questo progetto sono stati utilizzati classici hook stilistici:
+\begin{itemize}
+	\item controllo della presenza di un carattere newline a fine file;
+	\item controllo sulla presenza di spazi inutili;
+	\item molti altri, ad esempio per controllare che non siano presenti informazioni sensibili come chiavi private o file troppo grossi.
+\end{itemize}
+
+\noindent L'hook più importante però è \textit{gradle-task} che permette di lanciare il comando \textit{gradle test} prima di ogni commit.
+Per ora il task di test non fa altro che lanciare un ulteriore comando per validare il file RDF.
 
 \subsection{Validazione RDF}
+La validazione del file RDF avviene tramite un comando:
+\begin{minted}{shell}
+turtle --validate brittany.ttl
+\end{minted}
+Il comando è equivalente a:
+\begin{minted}{shell}
+riot --validate --syntax=ttl brittany.ttl
+\end{minted}
+Sia \textit{riot} che \textit{turtle} sono presenti nel framework Apache Jena~\cite{ApacheJe75:online}.
+
+\subsubsection{GitHub Workflow}
+Il workflow di GitHub è strutturato nel seguente modo:
+\begin{enumerate}
+	\item Checkout Repository;
+	\item Validazione RDF.
+\end{enumerate}
+
+\noindent La validazione RDF avviene attraverso l'azione fornita da \textit{vemonet/jena-riot-action}~\cite{vemonetj43:online}. L'azione lancia esattamente lo stesso comando illustrato nella sottosezione precedente.
