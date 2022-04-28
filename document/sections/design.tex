@@ -129,6 +129,15 @@ dbr:Basil .
 \subsubsection{W3 Thing Descriptor}
 ~\cite{ThingDes54:online}
 \subsubsection{Web of Things (WoT) Security Ontology}
-~\cite{WebofThi54:online}
+Questa ontologia contiene concetti utilizzati per definire il tipo di sicurezza utilizzato all'interno del Thing Descriptor.~\cite{WebofThi54:online}
+Per una configurazione priva meccanismi di sicurezza si può per esempio dichiarare un individuo come segue:
+\begin{minted}{turtle}
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+
+<#nosec-configuration>
+a wotsec:NoSecurityScheme ;
+td:hasConfigurationInstance <#no-sec> .
+\end{minted}
+
 \subsubsection{XML Schema}
 ~\cite{XMLSchem83:online}
