@@ -97,6 +97,8 @@ Proprietà utilizzata per definire quali tipi di dati possono essere forniti in 
 Proprietà utilizzata per legare un <\#Edge> al suo Thing Descriptor (td:Thing).
 
 \subsubsection{Individui}
+Sono stati realizzati degli individui di esempio. Nella serra che è stata creata (\textit{<\#angelo-greenhouse>}) è presente un solo ambiente (\textit{<\#angelo-environment>}) che contiene a sua volta una sola pianta (\textit{<\#angelo-basil>}). Il dispositivo Edge che è stato creato (\textit{<\#angelo-edge>}) è composto da un solo modulo che gestisce l'illuminazione (\textit{<\#digital-light-module>}). Quest'ultimo è composto di tre Operation Handler: uno di tipo \textit{<\#IsOnDigitalLightHandler>}, uno di tipo \textit{<\#TurnOnDigitalLightHandler>} ed uno di tipo \textit{<\#TurnOffDigitalLightHandler>}.
+Inoltre il modulo comprende due componenti di tipo <\#DigitalLightHw>, che sono proprio i componenti su cui possono interagire i tre Operation Handler appena elencati. Infine il dispositivo edge possiede un Thing Descriptor le cui ActionAffordance e PropertyAffordance sono mappate con quelle di tutti gli Operation Handler di tutti i Moduli che possiede.
 
 \subsection{Riuso di ontologie esistenti}
 \subsubsection{DBpedia}
@@ -138,6 +140,3 @@ Per una configurazione priva meccanismi di sicurezza si può per esempio dichiar
 a wotsec:NoSecurityScheme ;
 td:hasConfigurationInstance <#no-sec> .
 \end{minted}
-
-\subsubsection{XML Schema}
-~\cite{XMLSchem83:online}
