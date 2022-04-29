@@ -8,7 +8,7 @@ DBpedia contiene Linked Open Data in formato RDF. Le informazioni sono estratte 
 
 dbo:Plant .
 \end{minted}
-Ed una risorsa di tipo \textit{dbo:Plant}:
+È stata utilizzata anche una risorsa il cui tipo è proprio \textit{dbo:Plant}:
 \begin{minted}{turtle}
 @prefix dbr: <http://dbpedia.org/resource/> .
 
@@ -16,8 +16,8 @@ dbr:Basil .
 \end{minted}
 
 \subsection{domOS Common Ontology}
-Una delle ontologie più utilizzate in quanto ricca di contenuti compatibili con il dominio di "Brittany"~\cite{domOSCom57:online}.
-L'obiettivo di domOs Common Ontology è semplificare l'interoperabilità di dati e servizi all'interno di edifici nel dominio dell'IoT. L'ontologia quindi contiene risorse utili riguardo componenti hardware ed il modo in cui vengono utilizzati in ambienti reali:
+Una delle ontologie più utilizzate in questo progetto, in quanto ricca di contenuti compatibili con il dominio di "Brittany".
+L'obiettivo di domOs Common Ontology è semplificare l'interoperabilità di dati e servizi all'interno di edifici nel dominio dell'IoT~\cite{domOSCom57:online}. L'ontologia quindi contiene risorse utili riguardo componenti hardware ed il modo in cui vengono utilizzati in ambienti reali:
 
 \begin{minted}{turtle}
 @prefix dco: <https://w3id.org/dco#> .
@@ -68,7 +68,6 @@ td:hasOutputSchema [ a jsonschema:StringSchema ] .
 \noindent In questo caso si specifica che il tipo di output di questo handler è di tipo stringa. Sarebbe stato possibile utilizzare direttamente un tipo di dato diverso e più semplice, ma grazie a JSON Schema è possibile fornire una descrizione più accurata di quali range di valori sono possibili.
 
 \noindent JSON Schema è stata scelta perché utilizzato anche per specificare le strutture dai dati nelle azioni e nelle proprietà del Thing Descriptor.
-
 
 \subsection{Machine-to-Machine Measurement (M3)}
 L'ontologia Machine-to-Machine Measurement (M3) è un linguaggio unificato, un dizionario ricco di nomenclature utili per identificare concetti nel dominio dell'IoT (Sensors, RFID tags, etc.)~\cite{SWoTSema18:online}.
