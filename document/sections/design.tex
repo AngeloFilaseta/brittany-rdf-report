@@ -140,12 +140,20 @@ Un vocabolario che contiene standard per la struttura di oggetti JSON~\cite{JSON
 	td:hasOutputSchema [ a jsonschema:StringSchema ] .
 \end{minted}
 
-In questo caso si specifica che il tipo di output di questo handler è di tipo stringa. Sarebbe stato possibile utilizzare direttamente un tipo di dato diverso e più semplice, ma grazie a JSON Schema è possibile fornire una descrizione più accurata di quali range di valori sono possibili.
+\noindent In questo caso si specifica che il tipo di output di questo handler è di tipo stringa. Sarebbe stato possibile utilizzare direttamente un tipo di dato diverso e più semplice, ma grazie a JSON Schema è possibile fornire una descrizione più accurata di quali range di valori sono possibili.
 
 \subsubsection{Machine-to-Machine Measurement (M3)}
 ~\cite{SWoTSema18:online}
 \subsubsection{SEAS Ontology}
-~\cite{SEAS:online}
+L'ontologia SEAS comprende anche una tassonomia su edifici, stanze e spazi in generale~\cite{SEAS:online}. Il principale utilizzo è stato proprio per modellare meglio i concetti di serra e ambiente:
+
+\begin{minted}{turtle}
+@prefix seas: <https://w3id.org/seas/> .
+
+<#Greenhouse>
+	owl:equivalentClass seas:Greenhouse .
+\end{minted}
+
 \subsubsection{W3 Thing Descriptor}
 ~\cite{ThingDes54:online}
 \subsubsection{Web of Things (WoT) Security Ontology}
