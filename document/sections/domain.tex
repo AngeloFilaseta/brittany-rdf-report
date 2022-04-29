@@ -2,13 +2,15 @@
 
 \subsection{Scope del progetto}
 
-Brittany è un sistema di serre il cui scopo è automatizzare il più possibile i processi di crescita di alcune piante. Il sistema è composto da dispositivi edge che monitorano la situazione delle piante e dell'ambiente circostante (tramite sensori) ed eventualmente vi agiscono (tramite attuatori). Ogni edge dispone di funzionalità che dipendono dall'hardware a cui essi sono collegati.
-I dati che vengono campionati vengono raccolti in una base di dati. Gli utenti possono configurare le serre in base alle loro esigenze, visionare la situazione in un qualsiasi momento e possono essere avvisati in caso di situazioni anomale.
+Brittany è un sistema di serre il cui scopo è automatizzare il più possibile i processi di crescita di alcune piante.
+
+\noindent Il sistema è composto da dispositivi edge che monitorano la situazione delle piante e dell'ambiente circostante (tramite sensori) ed eventualmente vi agiscono (tramite attuatori). Ogni edge dispone di funzionalità che dipendono dall'hardware a cui essi sono collegati.
+I dati che vengono campionati vengono raccolti in una base di dati. Gli utenti possono configurare le serre in base alle loro esigenze, visionare la situazione in un qualsiasi momento e possono essere avvisati in caso di situazioni anomale~\cite{Brittany65:online}.
 
 \subsection{Descrizione ad alto livello del sistema}
 Brittany è un sistema suddiviso in micro servizi:
 \begin{itemize}
-	\item \textbf{Edge}: Si tratta del componente che manipola i sensori e gli attuatori all’interno degli ambienti della serra. In un ambiente possono esserci n Edge;
+	\item \textbf{Edge}: Si tratta del componente che manipola i sensori e gli attuatori all’interno degli ambienti della serra. In un ambiente possono esserci più Edge;
 	\item \textbf{Greenhouse Core}: Si tratta di un ambiente in cui degli agenti hanno un loro lifecycle, agiscono sugli Edge e contattano i Service qualora necessario.
 	\item \textbf{Auth Service}: Si tratta del servizio di autenticazione, che permette di effettuare le operazioni di registrazione e login al sistema.
 	\item \textbf{Settings Service}: Il servizio che consente di creare, modificare o eliminare determinate impostazioni utilizzate all’interno di Grennhouse Core, come ad esempio ogni quanto tempo campionare determinati tipi di dato.
