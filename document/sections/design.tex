@@ -122,9 +122,9 @@ dbr:Basil .
 FOAF è un progetto nato con lo scopo di collegare persone ed informazioni usando il web~\cite{FOAFVoca16:online}.
 In questo progetto è stata utilizzata principalmente la proprietà \textit{foaf:name} per fornire nomi a risorse:
 \begin{minted}{turtle}
-	@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
-	<#angelo-greenhouse>
+<#angelo-greenhouse>
 	a <#Greenhouse> ;
 	foaf:name "Angelo's Greenhouse" .
 \end{minted}
@@ -132,7 +132,16 @@ In questo progetto è stata utilizzata principalmente la proprietà \textit{foaf
 \subsubsection{Hypermedia Controls Ontology}
 ~\cite{Hypermed84:online}
 \subsubsection{JSON Schema}
-~\cite{JSONSche6:online}
+Un vocabolario che contiene standard per la struttura di oggetti JSON~\cite{JSONSche6:online}. Alcune caratteristiche del W3 Thing Descriptor come la struttura dei dati di input e di output sono rappresentati utilizzando alcuni di questi elementi:
+\begin{minted}{turtle}
+@prefix jsonschema: <https://www.w3.org/2019/wot/json-schema#> .
+
+<#turn-off-digital-light-sx>
+	td:hasOutputSchema [ a jsonschema:StringSchema ] .
+\end{minted}
+
+In questo caso si specifica che il tipo di output di questo handler è di tipo stringa. Sarebbe stato possibile utilizzare direttamente un tipo di dato diverso e più semplice, ma grazie a JSON Schema è possibile fornire una descrizione più accurata di quali range di valori sono possibili.
+
 \subsubsection{Machine-to-Machine Measurement (M3)}
 ~\cite{SWoTSema18:online}
 \subsubsection{SEAS Ontology}
@@ -146,6 +155,6 @@ Per una configurazione priva meccanismi di sicurezza si può per esempio dichiar
 @prefix wotsec: <https://www.w3.org/2019/wot/security#> .
 
 <#nosec-configuration>
-a wotsec:NoSecurityScheme ;
-td:hasConfigurationInstance <#no-sec> .
+	a wotsec:NoSecurityScheme ;
+	td:hasConfigurationInstance <#no-sec> .
 \end{minted}
