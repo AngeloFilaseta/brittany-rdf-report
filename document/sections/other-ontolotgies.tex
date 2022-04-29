@@ -1,0 +1,110 @@
+\section{Riuso di ontologie esistenti}
+\subsection{DBpedia}
+DBpedia contiene Linked Open Data in formato RDF. Le informazioni sono estratte dalle pagine di Wikipedia~\cite{wwwdbped0:online}.
+
+\noindent In questo progetto DBpedia è stata utilizzata per reperire concetti piuttosto semplici, in particolare è stata utilizzata la classe Plant attraverso l'ontologia:
+\begin{minted}{turtle}
+@prefix dbo: <http://dbpedia.org/ontology/> .
+
+dbo:Plant .
+\end{minted}
+Ed una risorsa di tipo \textit{dbo:Plant}:
+\begin{minted}{turtle}
+@prefix dbr: <http://dbpedia.org/resource/> .
+
+dbr:Basil .
+\end{minted}
+
+\subsection{domOS Common Ontology}
+Una delle ontologie più utilizzate in quanto ricca di contenuti compatibili con il dominio di "Brittany"~\cite{domOSCom57:online}.
+L'obiettivo di domOs Common Ontology è semplificare l'interoperabilità di dati e servizi all'interno di edifici nel dominio dell'IoT. L'ontologia quindi contiene risorse utili riguardo componenti hardware ed il modo in cui vengono utilizzati in ambienti reali:
+
+\begin{minted}{turtle}
+@prefix dco: <https://w3id.org/dco#> .
+
+<#Environment>
+rdfs:subClassOf dco:Space .
+
+<#Edge>
+owl:equivalentClass dco:Device .
+\end{minted}
+
+\subsection{FOAF}
+FOAF è un progetto nato con lo scopo di collegare persone ed informazioni usando il web~\cite{FOAFVoca16:online}.
+
+\noindent In questo progetto è stata utilizzata principalmente la proprietà \textit{foaf:name} per fornire nomi a risorse:
+\begin{minted}{turtle}
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+<#angelo-greenhouse>
+a <#Greenhouse> ;
+foaf:name "Angelo's Greenhouse" .
+\end{minted}
+
+\subsection{Hypermedia Controls Ontology}
+~\cite{Hypermed84:online}
+\subsection{JSON Schema}
+Un vocabolario che contiene standard per la struttura di oggetti JSON~\cite{JSONSche6:online}.
+
+\noindent Alcune caratteristiche degli Operation Handler come la struttura dei dati di input e di output sono rappresentati utilizzando alcuni di questi elementi:
+\begin{minted}{turtle}
+@prefix jsonschema: <https://www.w3.org/2019/wot/json-schema#> .
+
+<#turn-off-digital-light-sx>
+td:hasOutputSchema [ a jsonschema:StringSchema ] .
+\end{minted}
+\noindent In questo caso si specifica che il tipo di output di questo handler è di tipo stringa. Sarebbe stato possibile utilizzare direttamente un tipo di dato diverso e più semplice, ma grazie a JSON Schema è possibile fornire una descrizione più accurata di quali range di valori sono possibili.
+
+\noindent JSON Schema è stata scelta perché utilizzato anche per specificare le strutture dai dati nelle azioni e nelle proprietà del Thing Descriptor.
+
+
+\subsection{Machine-to-Machine Measurement (M3)}
+L'ontologia Machine-to-Machine Measurement (M3) è un linguaggio unificato, un dizionario ricco di nomenclature utili per identificare concetti nel dominio dell'IoT (Sensors, RFID tags, etc.)~\cite{SWoTSema18:online}.
+
+\noindent In questo progetto è stata utilizzata proprio per meglio collegare concetti come sensori, attuatori ed altri tipi di hardware:
+
+\begin{minted}{turtle}
+<#SensorHw>
+owl:equivalentClass m3:Sensor .
+\end{minted}
+
+\subsection{SEAS Ontology}
+L'ontologia SEAS comprende anche una tassonomia su edifici, stanze e spazi in generale~\cite{SEAS:online}.
+
+\noindent Il principale utilizzo è stato proprio per modellare meglio i concetti di serra e ambiente:
+
+\begin{minted}{turtle}
+@prefix seas: <https://w3id.org/seas/> .
+
+<#Greenhouse>
+owl:equivalentClass seas:Greenhouse .
+\end{minted}
+
+\subsection{W3 Thing Descriptor}
+Un Thing Descriptor (TD, o W3C WoT Thing Descriptor) è un modello di rappresentazione royalty-free basato sul linguaggio JSON ed utilizzato nell Internet of Things (IoT). Il TD fornisce un modo univoco per descrive un oggetto o un servizio, in funzione delle sue capacità, dei protocolli che usa, ed altri metadati. Usare un Thing Descriptor semplifica notevolmente l’integrazione di dispositivi IoT all’interno di sistemi che ne fanno uso~\cite{ThingDes54:online}.
+
+\noindent Anche se lo standard utilizzato per la creazione di un Thing Descriptor è il linguaggio JSON, è possibile una rappresentazione utilizzando qualsiasi linguaggio con sintassi RDF valida:
+\begin{minted}{turtle}
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+
+<#td-mock-ip>
+a td:Thing ;
+td:title "Angelo's ESP8266 TD" ;
+td:definesSecurityScheme <nosec-schema> ;
+td:hasSecurityConfiguration <#no-sec> ;
+td:hasActionAffordance
+<#turn-off-digital-light-sx>, <#turn-off-digital-light-dx>,
+<#turn-on-digital-light-sx>, <#turn-on-digital-light-dx> ;
+td:hasPropertyAffordance <#is-on-digital-light-sx>, <#is-on-digital-light-dx> .
+\end{minted}
+\subsection{Web of Things (WoT) Security Ontology}
+Questa ontologia contiene concetti utilizzati per definire il tipo di sicurezza utilizzato all'interno del Thing Descriptor~\cite{WebofThi54:online}.
+
+\noindent Per una configurazione priva meccanismi di sicurezza si può per esempio dichiarare un individuo come segue:
+\begin{minted}{turtle}
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+
+<#nosec-configuration>
+a wotsec:NoSecurityScheme ;
+td:hasConfigurationInstance <#no-sec> .
+\end{minted}
