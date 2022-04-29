@@ -42,7 +42,19 @@ foaf:name "Angelo's Greenhouse" .
 \end{minted}
 
 \subsection{Hypermedia Controls Ontology}
-~\cite{Hypermed84:online}
+Un'ontologia utilizzata per link, form e contenuti multimediali nel Web~\cite{Hypermed84:online}.
+
+\noindent Questa ontologia viene utilizzata per specificare il percorso di azioni e proprietà nel Thing Descriptor:
+\begin{minted}{turtle}
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+
+<#turn-off-digital-light-sx>
+	td:hasForm [
+		hctl:forContentType "application/json" ;
+		hctl:hasTarget "td-mock-ip/turnOff?id=digital-light-sx"
+	] ;
+\end{minted}
+
 \subsection{JSON Schema}
 Un vocabolario che contiene standard per la struttura di oggetti JSON~\cite{JSONSche6:online}.
 
