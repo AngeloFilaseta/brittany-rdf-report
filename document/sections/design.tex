@@ -120,6 +120,26 @@ Vengono ora elencate le ObjectProperty, ossia le proprietà il cui range deve es
 
 	\item \boldYellow{<\#isDigitalLightHwIn>}: Proprietà inversa di \textit{<\#hasDigitalLightHw>};
 
+\begin{info}[owns:]
+	La parola chiave "owns" è stata utilizzata per contraddistinguere tutte le proprietà il cui dominio è un \textbf{<\#ComponentModule>}.
+\end{info}
+
+	\item \textbf{<\#ownsComponentHw>}: Specializzazione di \textit{<\#hasComponentHw>} per modellare il fatto che un <#ComponentModule> possiede un \textit{<\#ComponentHw>};
+
+	\item \boldYellow{<\#isOwnedComponentHw>}: Proprietà inversa di \textit{<\#ownsComponentHw>};
+
+	\item \textbf{<\#ownsSensorHw>}: Specializzazione di \textit{<\#ownsComponentHw>} e di \textit{<\#hasSensorHw>} utilizzata per modellare il fatto che un <#ComponentModule> possiede un \textit{<\#SensorHw>};
+
+	\item \boldYellow{<\#isOwnedSensorHw>}: Proprietà inversa di \textit{<\#ownsSensorHw>};
+
+	\item \textbf{<\#ownsActuatorHw>}: Specializzazione di \textit{<\#ownsComponentHw>} e di \textit{<\#hasActuatorHw>} utilizzata per modellare il fatto che un <#ComponentModule> possiede un \textit{<\#ActuatorHw>};
+
+	\item \boldYellow{<\#isOwnedActuatorHw>}: Proprietà inversa di \textit{<\#ownsActuatorHw>};
+
+	\item \textbf{<\#ownsDigitalLightHw>}: Specializzazione di \textit{<\#ownsActuatorHw>} e di \textit{<\#hasDigitalLightHw>} utilizzata per modellare il fatto che un <#ComponentModule> possiede un \textit{<\#DigitalLightHw>};
+
+	\item \boldYellow{<\#isOwnedDigitalLightHw>}: Proprietà inversa di \textit{<\#ownsDigitalLightHw>};
+
 	\item \textbf{<\#hasHandlerOutputType>}: Proprietà utilizzata per definire il tipo di output fornito da un \textit{<\#OperationHandler>};
 
 	\item \textbf{<\#hasHandlerInputSchema>}: Proprietà utilizzata per definire quali tipi di dati possono essere forniti in input ad un \textit{<\#OperationHandler>};
