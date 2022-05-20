@@ -212,12 +212,21 @@ Vengono ora elencate le ObjectProperty, ossia le proprietà il cui range deve es
 
 
 \subsection{Individui}
-Sono stati realizzati degli individui di esempio.
+Sono stati realizzati degli individui di esempio:\newline
 
-\noindent Nella serra che è stata creata (\textit{<\#angelo-greenhouse>}) è presente un solo ambiente (\textit{<\#angelo-environment>}) che contiene a sua volta una sola pianta (\textit{<\#angelo-basil>}).
+\noindent Sono stati creati innanzitutto due individui di tipo \textit{foaf:Person}, \textit{<\#angelo-filaseta>} e \textit{<\#giorgia-savo>}.\newline
 
-\noindent Il dispositivo Edge che è stato creato (\textit{<\#angelo-edge>}) è composto da un solo modulo che gestisce l'illuminazione (\textit{<\#digital-light-module>}). Quest'ultimo è composto di tre Operation Handler: uno di tipo \textit{<\#IsOnDigitalLightHandler>}, uno di tipo \textit{<\#TurnOnDigitalLightHandler>} ed uno di tipo \textit{<\#TurnOffDigitalLightHandler>}
+\noindent Per ciascuno degli individui è stata creata una serra, rispettivamente \textit{<\#angelo-greehouse>} e \textit{<\#giorgia-greenhouse>}. La creazione degli individui di tipo persona e il legame alle serre attraverso la proprietà \textit{dbo:owner} non è necessaria ma è stata creata per rendere più chiaro il dominio.\newline
 
-\noindent Il modulo contiene due componenti di tipo <\#DigitalLightHw>, che sono proprio i componenti su cui possono interagire i tre Operation Handler appena nominati.
+\noindent Nella serra (\textit{<\#angelo-greenhouse>}) sono presenti due ambienti (\textit{<\#angelo-environment-one>} , \textit{<\#angelo-environment-two>}) che a loro volta contengono rispettivamente le piante \{\textit{<\#angelo-basil>}, \textit{<\#angelo-tomato>}, \textit{<\#angelo-parsley>}\} e \{\textit{<\#angelo-onion>}, \textit{<\#angelo-lettuce>})\}.\newline
 
-\noindent Infine il dispositivo edge possiede un Thing Descriptor le cui ActionAffordance e PropertyAffordance sono mappate con quelle di tutti gli Operation Handler di tutti i Moduli che possiede.
+\noindent Nella serra (\textit{<\#giorgia-greenhouse>}) è presente un solo ambiente (\textit{<\#giorgia-environment>}) che contiene le piante \{\textit{<\#giorgia-cucumber>, <\#giorgia-potato>})\}. \newline
+
+\noindent Entrambe le serre contengono un dispositivo Edge, rispettivamente \textit{<\#angelo-edge>} e \textit{<\#giorgia-edge>}. Entrambi gli Edge contengono un solo modulo di tipo \textit{<\#DigitalLightModule>}. La configurazione è la stessa:
+\begin{enumerate}
+	\item Il nome dell'individuo che rappresenta il modulo è \textit{<\#NOME-edge-module-digital-light>};
+	\item Ognuno ha a disposizione i tre handler \textit{<\#NOME-handler-turn-on-digital-light>}, \textit{<\#NOME-handler-turn-off-digital-light>}, \textit{<\#NOME-handler-is-on-digital-light>};
+\end{enumerate}
+La differenza è che gli handler \textit{<\#angelo-..>} hanno due individui di tipo \textit{<\#DigitalLightHw>} collegati (\textit{<\#angelo-digital-light-sx>} e \textit{<\#angelo-digital-light-sx>}) mentre quelli \textit{<\#giorgia-..>} ne hanno solo uno (\textit{<\#giorgia-digital-light-center>}).\newline
+
+\noindent Infine entrambi gli individui di tipo \textit{<\#Edge>} sono collegati ad un individuo di tipo \textit{<\#BrittanyThingDescriptor>}, rispettivamente \textit{<\#angelo-td-mock-ip>} e \textit{<\#giorgia-td-mock-ip>} le cui ActionAffordance e PropertyAffordance sono mappate con quelle di tutti gli Operation Handler di tutti i Moduli posseduti.
