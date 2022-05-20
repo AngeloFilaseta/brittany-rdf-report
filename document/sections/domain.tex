@@ -26,3 +26,18 @@ Greenhouse core deve necessariamente essere collocato nella stessa rete LAN in c
 Anche i parametri di configurazione di cui si occupa "Settings Service" sarebbero stati interessanti, ma sono già stati modellati accuratamente utilizzando altre tecnologie e sono stati quindi per ora esclusi.
 
 \centeredImage{img/represent.png}{Parte del sistema "Brittany" presa in considerazione per il progetto corrente}{0.7}
+
+\subsection{Ubiquitous Language}
+Viene di seguito illustrato come è stato definito l’Ubiquitous Language utilizzato nel sistema.
+
+\noindent Viene riportato il solo sottoinsieme di componenti di interesse per il progetto RDF. Verranno riportati in questa relazione solo alcuni dei concetti significativi, in quanto RDF è la tecnologia più adatta a modellare e definire l'Ubiquitous Language, ed è quindi possibile approfondire visionando il documento \textit{brittany.ttl}. Tra parentesi viene riportato il nome in italiano.
+
+\begin{itemize}
+	\item \textbf{Greenhouse (Serra)}: Una struttura artificiale suddiviso in \textit{ambienti} costruita appositamente per coltivare \textit{piante}.
+	\item \textbf{Environment (Ambiente)}: Sezione di una \textit{serra} che contiene più \textit{piante}. Una \textit{serra} è composta da almeno un \textit{ambiente}.
+	\item \textbf{Plant (Pianta)}: Unità vegetale contenuta all’interno di un \textit{ambiente} della \textit{serra}.
+	\item \textbf{Edge (Edge)}: Una macchina elettronica che colleziona dati da \textit{sensori} e che può manipolare degli \textit{attuatori}. Un \textit{Edge} è composto da \textit{moduli}. Un \textit{Edge} può essere posizionato in un \textit{ambiente} o su una \textit{pianta}.
+	\item \textbf{Module (Module)}: Un componente logico che può essere aggiunto ad un \textit{Edge} ed è composto da più \textit{Operation Handler}.
+	\item \textbf{Operation Handler (Operation Handler)}: Un'operazione che utilizza degli argomenti per della computazione e ritorna un risultato.
+	\item \textbf{Hardware Component (Componente Hardware)}: Un Componente Hardware che può essere utilizzato da un Operation Handler.
+\end{itemize}
