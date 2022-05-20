@@ -58,37 +58,67 @@ Seguono gli identificatori delle classi create. Vengono riportate alcune note im
 \subsection{Relazioni (Proprietà)}
 Seguono gli identificatori delle proprietà create. Vengono riportate alcune note importanti. Dettagli più accurati ed approfonditi sono riportati nel file RDF \textit{brittany.ttl}.
 
-\definecolor{yellow(munsell)}{rgb}{0.92, 0.75, 0.0}
+\definecolor{yellow(munsell)}{rgb}{0.65, 0.50, 0.0}
 \newcommand\boldYellow[1]{\textcolor{yellow(munsell)}{\textbf{#1}}}
 
 \subsubsection{ObjectProperty}
 Vengono ora elencate le ObjectProperty, ossia le proprietà il cui range deve essere necessariamente un individuo.
 \begin{itemize}
-	\item \textbf{<\#hasEnvironments>}: Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#Environment>} (almeno uno) all'interno di un \textit{<\#Greenhouse>};
+	\item \textbf{<\#hasEnvironment>}: Proprietà utilizzata per modellare il fatto all'interno di \textit{<\#Greenhouse>} c'è un \textit{<\#Environment>};
 
 	\item \boldYellow{<\#isEnvironmentOf>}: Proprietà inversa di \textit{<\#hasEnvironments>};
 
-	\item \textbf{<\#hasPlants>}: Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#Plant>} all'interno di un \textit{<\#Environment>};
+	\item \textbf{<\#hasPlant>}: Proprietà utilizzata per modellare il fatto che in uno spazio è presente una  \textit{<\#Plant>};
+
+	\item \boldYellow{<\#isPlantIn>}: Proprietà inversa di \textit{<\#hasPlant>};
+
+	\item \textbf{<\#hasEnvironmentPlant>}: Specializzazione di \textit{<\#hasPlant>}, utilizzata per modellare il fatto che in un \textit{<\#Environment>} è presente una  \textit{<\#Plant>};
+
+	\item \boldYellow{<\#isPlantInEnvironment>}: Proprietà inversa di \textit{<\#hasEnvironmentPlant>};
+
+	\item \textbf{<\#hasGreenhousePlant>}: Specializzazione di \textit{<\#hasPlant>}, utilizzata per modellare il fatto che in una \textit{<\#Greenhouse>} è presente una  \textit{<\#Plant>};
+
+	\item \boldYellow{<\#isPlantInGreenhouse>}: Proprietà inversa di \textit{<\#hasGreenhousePlant>};
+
+	\item \textbf{<\#hasGreenhouseEdge>}: Proprietà utilizzata per modellare il fatto che in una \textit{<\#Greenhouse>} è presente un \textit{<\#Edge>};
+
+	\item \boldYellow{<\#isEdgeInGreenhouse>}: Proprietà inversa di \textit{<\#hasGreenhouseEdge>};
+
+	\item \textbf{<\#hasModule>}: Proprietà utilizzata per modellare il fatto che è presente un \textit{<\#Module>} all'interno di un \textit{<\#Edge>};
+
+	\item \boldYellow{<\#isModuleIn>}: Proprietà inversa di \textit{<\#hasModule>};
+
+	\item \textbf{<\#hasHandler>}: Proprietà utilizzata per modellare il fatto che esiste un \textit{<\#OperationHandler>} all'interno di un \textit{<\#Module>};
+
+	\item \boldYellow{<\#isHandlerIn>}: Proprietà inversa di \textit{<\#hasHandler>};
 
 	\item \textbf{<\#monitor>}: Proprietà utilizzata per modellare il fatto che un \textit{<\#Edge>} può essere posto in un qualsiasi \textit{<\#Monitorable>};
 
+	\item \boldYellow{<\#isMonitored>}: Proprietà inversa di \textit{<\#monitor>};
+
 	\item \textbf{<\#monitorPlant>}: Specializzazione di \textit{<\#monitor>} dedicata al monitor di un \textit{<\#Plant>};
+
+	\item \boldYellow{<\#isPlantMonitored>}: Proprietà inversa di \textit{<\#monitorPlant>};
 
 	\item \textbf{<\#monitorEnvironment>}: Specializzazione di \textit{<\#monitor>} dedicata al monitor di una \textit{<\#Environment>};
 
-	\item \textbf{<\#hasComponents>}: Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#ComponentHw>} (almeno uno) all'interno di un \textit{<\#ComponentModule>};
+	\item \boldYellow{<\#isEnvironmentMonitored>}: Proprietà inversa di \textit{<\#monitorEnvironment>};
 
-	\item \textbf{<\#hasModules>}: Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#Module>} (almeno uno) all'interno di un \textit{<\#Edge>};
+	\item \textbf{<\#hasComponentHw>}: Proprietà utilizzata per modellare il fatto che qualcosa possiede un \textit{<\#ComponentHw>};
 
-	\item \textbf{<\#edgeName>}: Specializzazione di \textit{foaf:name} utilizzata per dare un nome ad un \textit{<\#Edge>};
+	\item \boldYellow{<\#isComponentHwIn>}: Proprietà inversa di \textit{<\#hasComponentHw>};
 
-	\item \textbf{<\#moduleName>}: Specializzazione di \textit{foaf:name} utilizzata per dare un nome ad un \textit{<\#Module>};
+	\item \textbf{<\#hasSensorHw>}: Specializzazione di \textit{<\#hasComponentHw>} utilizzata per modellare il fatto che qualcosa possiede un \textit{<\#SensorHw>};
 
-	\item \textbf{<\#handlerName>}: Specializzazione di \textit{foaf:name} utilizzata per dare un nome ad un \textit{<\#Handler>};
+	\item \boldYellow{<\#isSensorHwIn>}: Proprietà inversa di \textit{<\#hasSensorHw>};
 
-	\item \textbf{<\#componentName>}: Specializzazione di \textit{foaf:name} utilizzata per dare un nome ad un \textit{<\#ComponentHw>};
+	\item \textbf{<\#hasActuatorHw>}: Specializzazione di \textit{<\#hasComponentHw>} utilizzata per modellare il fatto che qualcosa possiede un \textit{<\#ActuatorHw>};
 
-	\item \textbf{<\#hasHandlers>}: Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#OperationHandler>} (almeno uno) all'interno di un \textit{<\#Module>};
+	\item \boldYellow{<\#isActuatorHwIn>}: Proprietà inversa di \textit{<\#hasActuatorHw>};
+
+	\item \textbf{<\#hasDigitalLightHw>}: Specializzazione di \textit{<\#hasActuatorHw>} utilizzata per modellare il fatto che qualcosa possiede un \textit{<\#DigitalLightHw>};
+
+	\item \boldYellow{<\#isDigitalLightHwIn>}: Proprietà inversa di \textit{<\#hasDigitalLightHw>};
 
 	\item \textbf{<\#hasHandlerOutputType>}: Proprietà utilizzata per definire il tipo di output fornito da un \textit{<\#OperationHandler>};
 
