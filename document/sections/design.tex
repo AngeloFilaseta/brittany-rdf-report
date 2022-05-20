@@ -124,19 +124,19 @@ Vengono ora elencate le ObjectProperty, ossia le proprietà il cui range deve es
 	La parola chiave "owns" è stata utilizzata per contraddistinguere tutte le proprietà il cui dominio è un \textbf{<\#ComponentModule>}.
 \end{info}
 
-	\item \textbf{<\#ownsComponentHw>}: Specializzazione di \textit{<\#hasComponentHw>} per modellare il fatto che un <#ComponentModule> possiede un \textit{<\#ComponentHw>};
+	\item \textbf{<\#ownsComponentHw>}: Specializzazione di \textit{<\#hasComponentHw>} per modellare il fatto che un <\#ComponentModule> possiede un \textit{<\#ComponentHw>};
 
 	\item \boldYellow{<\#isOwnedComponentHw>}: Proprietà inversa di \textit{<\#ownsComponentHw>};
 
-	\item \textbf{<\#ownsSensorHw>}: Specializzazione di \textit{<\#ownsComponentHw>} e di \textit{<\#hasSensorHw>} utilizzata per modellare il fatto che un <#ComponentModule> possiede un \textit{<\#SensorHw>};
+	\item \textbf{<\#ownsSensorHw>}: Specializzazione di \textit{<\#ownsComponentHw>} e di \textit{<\#hasSensorHw>} utilizzata per modellare il fatto che un <\#ComponentModule> possiede un \textit{<\#SensorHw>};
 
 	\item \boldYellow{<\#isOwnedSensorHw>}: Proprietà inversa di \textit{<\#ownsSensorHw>};
 
-	\item \textbf{<\#ownsActuatorHw>}: Specializzazione di \textit{<\#ownsComponentHw>} e di \textit{<\#hasActuatorHw>} utilizzata per modellare il fatto che un <#ComponentModule> possiede un \textit{<\#ActuatorHw>};
+	\item \textbf{<\#ownsActuatorHw>}: Specializzazione di \textit{<\#ownsComponentHw>} e di \textit{<\#hasActuatorHw>} utilizzata per modellare il fatto che un <\#ComponentModule> possiede un \textit{<\#ActuatorHw>};
 
 	\item \boldYellow{<\#isOwnedActuatorHw>}: Proprietà inversa di \textit{<\#ownsActuatorHw>};
 
-	\item \textbf{<\#ownsDigitalLightHw>}: Specializzazione di \textit{<\#ownsActuatorHw>} e di \textit{<\#hasDigitalLightHw>} utilizzata per modellare il fatto che un <#ComponentModule> possiede un \textit{<\#DigitalLightHw>};
+	\item \textbf{<\#ownsDigitalLightHw>}: Specializzazione di \textit{<\#ownsActuatorHw>} e di \textit{<\#hasDigitalLightHw>} utilizzata per modellare il fatto che un <\#ComponentModule> possiede un \textit{<\#DigitalLightHw>};
 
 	\item \boldYellow{<\#isOwnedDigitalLightHw>}: Proprietà inversa di \textit{<\#ownsDigitalLightHw>};
 
@@ -144,19 +144,19 @@ Vengono ora elencate le ObjectProperty, ossia le proprietà il cui range deve es
 	La parola chiave "collect" è stata utilizzata per contraddistinguere tutte le proprietà il cui dominio è un \textbf{<\#Edge>}.
 \end{info}
 
-	\item \textbf{<\#collectComponentHw>}: Specializzazione di \textit{<\#hasComponentHw>} utilizzata per modellare il fatto che un <#Edge> possiede un \textit{<\#ComponentHw>};
+	\item \textbf{<\#collectComponentHw>}: Specializzazione di \textit{<\#hasComponentHw>} utilizzata per modellare il fatto che un <\#Edge> possiede un \textit{<\#ComponentHw>};
 
 	\item \boldYellow{<\#isCollectedComponentHw>}: Proprietà inversa di \textit{<\#collectComponentHw>};
 
-	\item \textbf{<\#collectSensorHw>}: Specializzazione di \textit{<\#collectComponentHw>} e di \textit{<\#hasSensorHw>} utilizzata per modellare il fatto che un <#Edge> possiede un \textit{<\#SensorHw>};
+	\item \textbf{<\#collectSensorHw>}: Specializzazione di \textit{<\#collectComponentHw>} e di \textit{<\#hasSensorHw>} utilizzata per modellare il fatto che un <\#Edge> possiede un \textit{<\#SensorHw>};
 
 	\item \boldYellow{<\#isCollectedSensorHw>}: Proprietà inversa di \textit{<\#collectSensorHw>};
 
-	\item \textbf{<\#collectActuatorHw>}: Specializzazione di \textit{<\#collectComponentHw>} e di \textit{<\#hasActuatorHw>} utilizzata per modellare il fatto che un <#Edge> possiede un \textit{<\#ActuatorHw>};
+	\item \textbf{<\#collectActuatorHw>}: Specializzazione di \textit{<\#collectComponentHw>} e di \textit{<\#hasActuatorHw>} utilizzata per modellare il fatto che un <\#Edge> possiede un \textit{<\#ActuatorHw>};
 
 	\item \boldYellow{<\#isCollectedActuatorHw>}: Proprietà inversa di \textit{<\#collectActuatorHw>};
 
-	\item \textbf{<\#collectDigitalLightHw>}: Specializzazione di \textit{<\#collectActuatorHw>} e di \textit{<\#hasDigitalLightHw>} utilizzata per modellare il fatto che un <#Edge> possiede un \textit{<\#DigitalLightHw>};
+	\item \textbf{<\#collectDigitalLightHw>}: Specializzazione di \textit{<\#collectActuatorHw>} e di \textit{<\#hasDigitalLightHw>} utilizzata per modellare il fatto che un <\#Edge> possiede un \textit{<\#DigitalLightHw>};
 
 	\item \boldYellow{<\#isCollectedDigitalLightHw>}: Proprietà inversa di \textit{<\#collectDigitalLightHw>};
 
@@ -164,32 +164,52 @@ Vengono ora elencate le ObjectProperty, ossia le proprietà il cui range deve es
 	La parola chiave "handle" è stata utilizzata per contraddistinguere tutte le proprietà il cui dominio è un \textbf{<\#ComponentOperationHandler>}.
 \end{info}
 
-	\item \textbf{<\#handleComponentHw>}: Specializzazione di \textit{<\#hasComponentHw>} utilizzata per modellare il fatto che un <#ComponentOperationHandler> agisce su un \textit{<\#ComponentHw>};
+	\item \textbf{<\#handleComponentHw>}: Specializzazione di \textit{<\#hasComponentHw>} utilizzata per modellare il fatto che un <\#ComponentOperationHandler> agisce su un \textit{<\#ComponentHw>};
 
 	\item \boldYellow{<\#isHandledComponentHw>}: Proprietà inversa di \textit{<\#handleComponentHw>};
 
-	\item \textbf{<\#handleSensorHw>}: Specializzazione di \textit{<\#handleComponentHw>} e di \textit{<\#hasSensorHw>} utilizzata per modellare il fatto che un <#ComponentOperationHandler> agisce su un \textit{<\#SensorHw>};
+	\item \textbf{<\#handleSensorHw>}: Specializzazione di \textit{<\#handleComponentHw>} e di \textit{<\#hasSensorHw>} utilizzata per modellare il fatto che un <\#ComponentOperationHandler> agisce su un \textit{<\#SensorHw>};
 
 	\item \boldYellow{<\#isHandledSensorHw>}: Proprietà inversa di \textit{<\#handleSensorHw>};
 
-	\item \textbf{<\#handleActuatorHw>}: Specializzazione di \textit{<\#handleComponentHw>} e di \textit{<\#hasActuatorHw>} utilizzata per modellare il fatto che un <#ComponentOperationHandler> agisce su \textit{<\#ActuatorHw>};
+	\item \textbf{<\#handleActuatorHw>}: Specializzazione di \textit{<\#handleComponentHw>} e di \textit{<\#hasActuatorHw>} utilizzata per modellare il fatto che un <\#ComponentOperationHandler> agisce su \textit{<\#ActuatorHw>};
 
 	\item \boldYellow{<\#isHandledActuatorHw>}: Proprietà inversa di \textit{<\#handleActuatorHw>};
 
-	\item \textbf{<\#handleDigitalLightHw>}: Specializzazione di \textit{<\#handleActuatorHw>} e di \textit{<\#hasDigitalLightHw>} utilizzata per modellare il fatto che un <#ComponentOperationHandler> agisce su un \textit{<\#DigitalLightHw>};
+	\item \textbf{<\#handleDigitalLightHw>}: Specializzazione di \textit{<\#handleActuatorHw>} e di \textit{<\#hasDigitalLightHw>} utilizzata per modellare il fatto che un <\#ComponentOperationHandler> agisce su un \textit{<\#DigitalLightHw>};
 
 	\item \boldYellow{<\#isHandledDigitalLightHw>}: Proprietà inversa di \textit{<\#handleDigitalLightHw>};
 
+	\item \textbf{<\#hasHandlerInteractionAffordance>}:  Proprietà utilizzata per modellare il fatto che un <\#OperationHandler> è collegato ad una Property Affordance \textit{(td:PropertyAffordance)};
 
+	\item \boldYellow{<\#isInteractionAffordanceOfHandler>}: Proprietà inversa di \textit{<\#hasHandlerInteractionAffordance>};
 
+	\item \textbf{<\#hasHandlerPropertyAffordance>}: Specializzazione di \textit{<\#hasHandlerInteractionAffordance>} utilizzata per modellare il fatto che un <\#OperationHandler> è collegato ad una Property Affordance \textit{(td:PropertyAffordance)};
 
+	\item \boldYellow{<\#isPropertyAffordanceOfHandler>}: Proprietà inversa di \textit{<\#hasHandlerPropertyAffordance>};
 
-	\item \textbf{<\#hasHandlerOutputType>}: Proprietà utilizzata per definire il tipo di output fornito da un \textit{<\#OperationHandler>};
+	\item \textbf{<\#hasHandlerActionAffordance>}: Specializzazione di \textit{<\#hasHandlerInteractionAffordance>} utilizzata per modellare il fatto che un <\#OperationHandler> è collegato ad una Action Affordance \textit{(td:ActionAffordance)};
+
+	\item \boldYellow{<\#isActionAffordanceOfHandler>}: Proprietà inversa di \textit{<\#hasHandlerActionAffordance>};
 
 	\item \textbf{<\#hasHandlerInputSchema>}: Proprietà utilizzata per definire quali tipi di dati possono essere forniti in input ad un \textit{<\#OperationHandler>};
 
-	\item \textbf{<\#hasThingDescriptor>}: Proprietà utilizzata per legare un \textit{<\#Edge>} al suo Thing Descriptor (\textit{td:Thing}).
+	\item \boldYellow{<\#isInputSchemaOfHandler>}: Proprietà inversa di \textit{<\#hasHandlerInputSchema>};
+
+	\item \textbf{<\#hasThingDescriptor>}: Proprietà utilizzata per legare un \textit{<\#Edge>} al suo Thing Descriptor (\textit{<\#BrittanyThingDescriptor>});
+
+	\item \boldYellow{<\#isThingDescriptor>}: Proprietà inversa di \textit{<\#hasThingDescriptor>}.
 \end{itemize}
+
+\subsubsection{DatatyeProperty}
+\begin{itemize}
+	\item \textbf{foaf:name}: Proprietà utilizzata per definire il nome di risorse;
+
+	\item \textbf{hctl:forContentType}: Proprietà utilizzata per definire in che modo i dati vengono scambiati nelle Interaction Affordance \textit{(td:InteractionAffordance)};
+
+	\item \textbf{<\#hasHandlerOutputType>}: Proprietà utilizzata per definire il tipo di output fornito da un \textit{<\#OperationHandler>}.
+\end{itemize}
+
 
 \subsection{Individui}
 Sono stati realizzati degli individui di esempio.
