@@ -10,48 +10,90 @@
 Seguono gli identificatori delle classi create. Vengono riportate alcune note importanti. Dettagli più accurati ed approfonditi sono riportati nel file RDF \textit{brittany.ttl}:
 
 \begin{itemize}
-	\item \textbf{<\#Greenhouse>}:Utilizzato per modellare il concetto di Serra.
-	\item \textbf{<\#Monitorable>}: Utilizzato per modellare il concetto di un "qualcosa" che può essere controllato da una classe di tipo \textit{<\#Edge>}. \textit{<\#Environment>} e \textit{<\#Plant>} sono sottoclassi di questa classe.
-	\item \textbf{<\#Environment>}: Utilizzato per modellare il concetto di Ambiente.
-	\item \textbf{<\#Plant>}: Utilizzato per modellare il concetto di Pianta.
-	\item \textbf{<\#Edge>}: Utilizzato per modellare il concetto di Edge.
-	\item \textbf{<\#Module>}: Utilizzato per modellare il concetto di Modulo.
-	\item \textbf{<\#ComponentModule>}: Si tratta di una specializzazione di \textit{<\#Module>} che agisce necessariamente su dei componenti hardware (\textit{<\#ComponentHw>}).
-	\item \textbf{<\#DigitalLightModule>}: Una specializzazione di \textit{<\#ComponentModule>} che si occupa del sistema di illuminazione.
-	\item \textbf{<\#OperationHandler>}
-	Utilizzato per modellare il concetto di Operation Handler.
-	\item \textbf{<\#ComponentOperationHandler>}: Specializzazione di \textit{<\#OperationHandler>} che agisce necessariamente su dei componenti hardware (\textit{<\#ComponentHw>}).
-	\item \textbf{<\#ActionOperationHandler>}
-	Specializzazione di \textit{<\#OperationHandler>} utilizzata per definire un'operazione che effettua un'azione.
-	\item \textbf{<\#PropertyOperationHandler>}: Specializzazione di \textit{<\#OperationHandler>} utilizzata per definire un'operazione che ricava una proprietà.
-	\item \textbf{<\#DigitalLightHandler>}: Specializzazione di \textit{<\#ComponentOperationHandler>} per definire operazioni legate al sistema di illuminazione.
+	\item \textbf{<\#NameRestriction>}:Classe di tipo \textit{owl:Restriction}, non anonima perché riutilizzata da più classi;
+
+	\item \textbf{<\#Greenhouse>}:Utilizzato per modellare il concetto di Serra;
+
+	\item \textbf{<\#Monitorable>}: Utilizzato per modellare il concetto di un "qualcosa" che può essere controllato da una classe di tipo \textit{<\#Edge>}. \textit{<\#Environment>} e \textit{<\#Plant>} sono sottoclassi di questa classe;
+
+	\item \textbf{<\#Environment>}: Utilizzato per modellare il concetto di Ambiente;
+
+	\item \textbf{<\#Plant>}: Utilizzato per modellare il concetto di Pianta;
+
+	\item \textbf{<\#Edge>}: Utilizzato per modellare il concetto di Edge;
+
+	\item \textbf{<\#Module>}: Utilizzato per modellare il concetto di Modulo;
+
+	\item \textbf{<\#ComponentModule>}: Si tratta di una specializzazione di \textit{<\#Module>} che agisce necessariamente su dei componenti hardware (\textit{<\#ComponentHw>});
+
+	\item \textbf{<\#DigitalLightModule>}: Una specializzazione di \textit{<\#ComponentModule>} che si occupa del sistema di illuminazione;
+
+	\item \textbf{<\#OperationHandler>}: Utilizzato per modellare il concetto di Operation Handler;
+
+	\item \textbf{<\#ComponentOperationHandler>}: Specializzazione di \textit{<\#OperationHandler>} che agisce necessariamente su dei componenti hardware (\textit{<\#ComponentHw>});
+
+	\item \textbf{<\#ActionOperationHandler>}: Specializzazione di \textit{<\#OperationHandler>} utilizzata per definire un'operazione che effettua un'azione;
+
+	\item \textbf{<\#PropertyOperationHandler>}: Specializzazione di \textit{<\#OperationHandler>} utilizzata per definire un'operazione che ricava una proprietà;
+
+	\item \textbf{<\#DigitalLightHandler>}: Specializzazione di \textit{<\#ComponentOperationHandler>} per definire operazioni legate al sistema di illuminazione;
+
 	\item \textbf{<\#IsOnDigitalLightHandler>}: Specializzazione di \textit{<\#DigitalLightHandler>} e di \textit{<\#PropertyOperationHandler>}. L'operazione si occupa di verificare se un determinato componente che fa parte del sistema di illuminazione è acceso.
-	\item \textbf{<\#TurnOnDigitalLightHandler>}: Specializzazione di \textit{<\#DigitalLightHandler>} e di \textit{<\#PropertyOperationHandler>}. L'operazione si occupa di accendere un determinato componente che fa parte del sistema di illuminazione.
-	\item \textbf{<\#TurnOffDigitalLightHandler>}: Specializzazione di \textit{<\#DigitalLightHandler>} e di \textit{<\#PropertyOperationHandler>}. L'operazione si occupa di spegnere un determinato componente che fa parte del sistema di illuminazione.
-	\item \textbf{<\#ComponentHw>}: Utilizzato per modellare il concetto di Componente Hardware.
-	\item \textbf{<\#SensorHw>}: Specializzazione di \textit{<\#ComponentHw>}. Un componente che ricava dati dall'area circostante.
-	\item \textbf{<\#ActuatorHw>}: Specializzazione di \textit{<\#ComponentHw>}. Un componente che agisce sull'area circostante.
-	\item \textbf{<\#DigitalLightHw>}: Specializzazione di \textit{<\#ActuatorHw>}. Un attuatore che si occupa del sistema di illuminazione.
+
+	\item \textbf{<\#TurnOnDigitalLightHandler>}: Specializzazione di \textit{<\#DigitalLightHandler>} e di \textit{<\#PropertyOperationHandler>}. L'operazione si occupa di accendere un determinato componente che fa parte del sistema di illuminazione;
+
+	\item \textbf{<\#TurnOffDigitalLightHandler>}: Specializzazione di \textit{<\#DigitalLightHandler>} e di \textit{<\#PropertyOperationHandler>}. L'operazione si occupa di spegnere un determinato componente che fa parte del sistema di illuminazione;
+
+	\item \textbf{<\#ComponentHw>}: Utilizzato per modellare il concetto di Componente Hardware;
+
+	\item \textbf{<\#SensorHw>}: Specializzazione di \textit{<\#ComponentHw>}. Un componente che ricava dati dall'area circostante;
+
+	\item \textbf{<\#ActuatorHw>}: Specializzazione di \textit{<\#ComponentHw>}. Un componente che agisce sull'area circostante;
+
+	\item \textbf{<\#DigitalLightHw>}: Specializzazione di \textit{<\#ActuatorHw>}. Un attuatore che si occupa del sistema di illuminazione;
+
+	\item \textbf{<\#BrittanyThingDescriptor>}: Specializzazione di \textit{td:Thing}. Un Thing Descriptor che ha alcune proprietà sempre dello stesso tipo. Brittany utilizza infatti sempre alcuni tipi di valori e questa classe permette di porre quei vincoli.
 \end{itemize}
 
 \subsection{Relazioni (Proprietà)}
-Seguono gli identificatori delle proprietà create. Vengono riportate alcune note importanti. Dettagli più accurati ed approfonditi sono riportati nel file RDF \textit{brittany.ttl}:
+Seguono gli identificatori delle proprietà create. Vengono riportate alcune note importanti. Dettagli più accurati ed approfonditi sono riportati nel file RDF \textit{brittany.ttl}.
 
+\definecolor{yellow(munsell)}{rgb}{0.92, 0.75, 0.0}
+\newcommand\boldYellow[1]{\textcolor{yellow(munsell)}{\textbf{#1}}}
+
+\subsubsection{ObjectProperty}
+Vengono ora elencate le ObjectProperty, ossia le proprietà il cui range deve essere necessariamente un individuo.
 \begin{itemize}
-	\item \textbf{<\#hasEnvironments>}: Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#Environment>} (almeno uno) all'interno di un \textit{<\#Greenhouse>}.
-	\item \textbf{<\#hasPlants>}: Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#Plant>} all'interno di un \textit{<\#Environment>}.
-	\item \textbf{<\#monitor>}: Proprietà utilizzata per modellare il fatto che un \textit{<\#Edge>} può essere posto in un qualsiasi \textit{<\#Monitorable>}.
-	\item \textbf{<\#monitorPlant>}: Specializzazione di \textit{<\#monitor>} dedicata al monitor di un \textit{<\#Plant>}.
-	\item \textbf{<\#monitorEnvironment>}: Specializzazione di \textit{<\#monitor>} dedicata al monitor di una \textit{<\#Environment>}.
-	\item \textbf{<\#hasComponents>}: Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#ComponentHw>} (almeno uno) all'interno di un \textit{<\#ComponentModule>}.
-	\item \textbf{<\#hasModules>}: Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#Module>} (almeno uno) all'interno di un \textit{<\#Edge>}.
-	\item \textbf{<\#edgeName>}: Specializzazione di \textit{foaf:name} utilizzata per dare un nome ad un \textit{<\#Edge>}.
-	\item \textbf{<\#moduleName>}: Specializzazione di \textit{foaf:name} utilizzata per dare un nome ad un \textit{<\#Module>}.
-	\item \textbf{<\#handlerName>}: Specializzazione di \textit{foaf:name} utilizzata per dare un nome ad un \textit{<\#Handler>}.
-	\item \textbf{<\#componentName>}: Specializzazione di \textit{foaf:name} utilizzata per dare un nome ad un \textit{<\#ComponentHw>}.
-	\item \textbf{<\#hasHandlers>}: Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#OperationHandler>} (almeno uno) all'interno di un \textit{<\#Module>}.
-	\item \textbf{<\#hasHandlerOutputType>}: Proprietà utilizzata per definire il tipo di output fornito da un \textit{<\#OperationHandler>}.
-	\item \textbf{<\#hasHandlerInputSchema>}: Proprietà utilizzata per definire quali tipi di dati possono essere forniti in input ad un \textit{<\#OperationHandler>}.
+	\item \textbf{<\#hasEnvironments>}: Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#Environment>} (almeno uno) all'interno di un \textit{<\#Greenhouse>};
+
+	\item \boldYellow{<\#isEnvironmentOf>}: Proprietà inversa di \textit{<\#hasEnvironments>};
+
+	\item \textbf{<\#hasPlants>}: Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#Plant>} all'interno di un \textit{<\#Environment>};
+
+	\item \textbf{<\#monitor>}: Proprietà utilizzata per modellare il fatto che un \textit{<\#Edge>} può essere posto in un qualsiasi \textit{<\#Monitorable>};
+
+	\item \textbf{<\#monitorPlant>}: Specializzazione di \textit{<\#monitor>} dedicata al monitor di un \textit{<\#Plant>};
+
+	\item \textbf{<\#monitorEnvironment>}: Specializzazione di \textit{<\#monitor>} dedicata al monitor di una \textit{<\#Environment>};
+
+	\item \textbf{<\#hasComponents>}: Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#ComponentHw>} (almeno uno) all'interno di un \textit{<\#ComponentModule>};
+
+	\item \textbf{<\#hasModules>}: Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#Module>} (almeno uno) all'interno di un \textit{<\#Edge>};
+
+	\item \textbf{<\#edgeName>}: Specializzazione di \textit{foaf:name} utilizzata per dare un nome ad un \textit{<\#Edge>};
+
+	\item \textbf{<\#moduleName>}: Specializzazione di \textit{foaf:name} utilizzata per dare un nome ad un \textit{<\#Module>};
+
+	\item \textbf{<\#handlerName>}: Specializzazione di \textit{foaf:name} utilizzata per dare un nome ad un \textit{<\#Handler>};
+
+	\item \textbf{<\#componentName>}: Specializzazione di \textit{foaf:name} utilizzata per dare un nome ad un \textit{<\#ComponentHw>};
+
+	\item \textbf{<\#hasHandlers>}: Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#OperationHandler>} (almeno uno) all'interno di un \textit{<\#Module>};
+
+	\item \textbf{<\#hasHandlerOutputType>}: Proprietà utilizzata per definire il tipo di output fornito da un \textit{<\#OperationHandler>};
+
+	\item \textbf{<\#hasHandlerInputSchema>}: Proprietà utilizzata per definire quali tipi di dati possono essere forniti in input ad un \textit{<\#OperationHandler>};
+
 	\item \textbf{<\#hasThingDescriptor>}: Proprietà utilizzata per legare un \textit{<\#Edge>} al suo Thing Descriptor (\textit{td:Thing}).
 \end{itemize}
 
