@@ -1,0 +1,54 @@
+\section{Regole SWRL}
+
+\subsection{Tipizzazione automatica delle Property Affordance}
+Lo scopo è cercare di inferire informazioni utili per il Thing Descriptor a partire dagli Operation Handler. Il Thing Descriptor è composto da Actions e Properties. Ogni Property contiene indicazioni sul tipo di output. Per indicarlo è sufficiente aggiungere una tripla del tipo \textit{p rdf:type t}, dove \textit{p} è la proprietà e t è una sotto classe di \textit{jsonschema:DataSchema}. Il tipo di output può essere recuperato a partire dall'Operation Handler a cui la Property è legata attraverso la proprietà RDF \textit{<\#isPropertyAffordanceOfHandler>}. L'Operation Handler specifica il tipo di output attraverso la proprietà RDF \textit{<\#hasHandlerOuputType>}. I valori possibili sono object, array, string, number, integer, boolean, e null~\cite{WebofThi22:online}.\newline
+\noindent Esiste quindi una regola SWRL per ognuno di questi casi:
+
+\subsubsection{swrl-property-affordance-from-handler-object}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, "object")
+	->  jsonschema:ObjectSchema(?p)
+\end{minted}
+
+\subsubsection{swrl-property-affordance-from-handler-array}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, "array")
+	->  jsonschema:ArraySchema(?p)
+\end{minted}
+
+\subsubsection{swrl-property-affordance-from-handler-string}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, "string")
+	->  jsonschema:StringSchema(?p)
+\end{minted}
+
+\subsubsection{swrl-property-affordance-from-handler-number}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, "number")
+	->  jsonschema:NumberSchema(?p)
+\end{minted}
+
+\subsubsection{swrl-property-affordance-from-handler-integer}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, "integer")
+	->  jsonschema:IntegerSchema(?p)
+\end{minted}
+
+\subsubsection{swrl-property-affordance-from-handler-boolean}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, "boolean")
+	->  jsonschema:BooleanSchema(?p)
+\end{minted}
+
+\subsubsection{swrl-property-affordance-from-handler-null}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, "null")
+	->  jsonschema:NullSchema(?p)
+\end{minted}
