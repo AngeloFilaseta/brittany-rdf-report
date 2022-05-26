@@ -52,3 +52,69 @@ La regola, utilizzando una sintassi human readable, ha la seuente forma:
 isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, "null")
 	->  jsonschema:NullSchema(?p)
 \end{minted}
+
+\subsection{Tipizzazione automatica delle Action Affordance}
+Lo scopo è praticamente lo stesso della sezione precedente. Anche ogni Action contiene indicazioni sul tipo di output, ma per indicarlo non è sufficiente aggiungere una tripla per specificare il tipo. Le informazioni sul tipo di output devono essere in questo caso contenute all'interno di un individuo, legato all'Action attraverso la properietà RDF \textit{td:hasOutputSchema}. Anche in questo caso il tipo di output può essere recuperato a partire dall'Operation Handler a cui la Property è legata attraverso la proprietà RDF \textit{<\#isActionAffordanceOfHandler>}. L'Operation Handler specifica il tipo di output attraverso la proprietà RDF \textit{<\#hasHandlerOuputType>}. Ancora una volta i valori possibili sono object, array, string, number, integer, boolean, e null.\newline
+Per la creazione di un nuovo individuo è stata utilizzata la SWRL Extensions built-in library~\cite{Extensio2:online}, che contiene built-in sperimentali. In particolare è stato utilizzato il built-in \textit{swrlx:makeOWLThing(?new,?ind)} che crea un nuovo individuo \textit{?new} per ogni \textit{?ind}.\newline
+\begin{warn}
+	Essendo la SWRL Extensions built-in library in fase sperimentale, non tutti i reasoner sono in grado di inferire le informazioni nel modo corretto. Anche Pellet fallisce in questa operazione lanciando un warning che avvisa di ignorare la regola:\newline\newline
+	\noindent \color{red}{WARNING} \color{black}\textit{: Ignoring rule RULE\_NAME]): No builtin for} \url{http://swrl.stanford.edu/ontologies/built-ins/3.3/swrlx.owl#makeOWLThing}.\newline\newline
+	\noindent Esistono comunque altri stumenti come Drools in grado di comprendere la regola e aggiungere le triple all'ontologia.
+\end{warn}
+\noindent Esiste quindi una regola SWRL per ognuno dei casi possibili:
+
+\subsubsection{swrl-action-affordance-from-handler-object}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, "object") ^
+swrlx:makeOWLThing(?i, ?a)
+	-> jsonschema:ObjectSchema(?i) ^ td:hasOutputSchema(?a, ?i)
+\end{minted}
+
+\subsubsection{swrl-action-affordance-from-handler-array}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, "array") ^
+swrlx:makeOWLThing(?i, ?a)
+	-> jsonschema:ArraySchema(?i) ^ td:hasOutputSchema(?a, ?i)
+\end{minted}
+
+\subsubsection{swrl-action-affordance-from-handler-string}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, "string") ^
+swrlx:makeOWLThing(?i, ?a)
+	-> jsonschema:StringSchema(?i) ^ td:hasOutputSchema(?a, ?i)
+\end{minted}
+
+\subsubsection{swrl-action-affordance-from-handler-number}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, "number") ^
+swrlx:makeOWLThing(?i, ?a)
+	-> jsonschema:NumberSchema(?i) ^ td:hasOutputSchema(?a, ?i)
+\end{minted}
+
+\subsubsection{swrl-action-affordance-from-handler-integer}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, "integer") ^
+swrlx:makeOWLThing(?i, ?a)
+	-> jsonschema:IntegerSchema(?i) ^ td:hasOutputSchema(?a, ?i)
+\end{minted}
+
+\subsubsection{swrl-action-affordance-from-handler-boolean}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, "boolean") ^
+swrlx:makeOWLThing(?i, ?a)
+	-> jsonschema:BooleanSchema(?i) ^ td:hasOutputSchema(?a, ?i)
+\end{minted}
+
+\subsubsection{swrl-action-affordance-from-handler-null}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, "null") ^
+swrlx:makeOWLThing(?i, ?a)
+	-> jsonschema:NullSchema(?i) ^ td:hasOutputSchema(?a, ?i)
+\end{minted}

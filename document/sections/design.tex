@@ -53,6 +53,9 @@ Seguono gli identificatori delle classi create. Vengono riportate alcune note im
 	\item \textbf{<\#DigitalLightHw>}: Specializzazione di \textit{<\#ActuatorHw>}. Un attuatore che si occupa del sistema di illuminazione;
 
 	\item \textbf{<\#BrittanyThingDescriptor>}: Specializzazione di \textit{td:Thing}. Un Thing Descriptor che ha alcune proprietà sempre dello stesso tipo. Brittany utilizza infatti sempre alcuni tipi di valori e questa classe permette di porre quei vincoli.
+
+	\item \textbf{<\#BrittanyForm>}: Specializzazione di \textit{td:Form}. Un Form che ha ha alcune proprietà sempre dello stesso tipo.
+
 \end{itemize}
 
 \subsection{Relazioni (Proprietà)}
@@ -198,7 +201,14 @@ Vengono ora elencate le ObjectProperty, ossia le proprietà il cui range deve es
 
 	\item \textbf{<\#hasThingDescriptor>}: Proprietà utilizzata per legare un \textit{<\#Edge>} al suo Thing Descriptor (\textit{<\#BrittanyThingDescriptor>});
 
-	\item \boldYellow{<\#isThingDescriptor>}: Proprietà inversa di \textit{<\#hasThingDescriptor>}.
+	\item \boldYellow{<\#isThingDescriptor>}: Proprietà inversa di \textit{<\#hasThingDescriptor>};
+
+	\item \boldYellow{<\#isInteractionAffordanceOf>}: Proprietà inversa di \textit{td:hasInteractionAffordance};
+
+	\item \boldYellow{<\#isPropertyAffordanceOf>}: Proprietà inversa di \textit{td:hasPropertyAffordance};
+
+	\item \boldYellow{<\#isActionAffordanceOf>}: Proprietà inversa di \textit{td:hasActionAffordance}.
+
 \end{itemize}
 
 \subsubsection{DatatyeProperty}
@@ -208,6 +218,7 @@ Vengono ora elencate le ObjectProperty, ossia le proprietà il cui range deve es
 	\item \textbf{hctl:forContentType}: Proprietà utilizzata per definire in che modo i dati vengono scambiati nelle Interaction Affordance \textit{(td:InteractionAffordance)};
 
 	\item \textbf{<\#hasHandlerOutputType>}: Proprietà utilizzata per definire il tipo di output fornito da un \textit{<\#OperationHandler>}.
+
 \end{itemize}
 
 
