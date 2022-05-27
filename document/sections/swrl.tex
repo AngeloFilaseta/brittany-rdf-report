@@ -1,0 +1,171 @@
+\section{Regole SWRL}
+
+\subsection{Tipizzazione automatica delle Property Affordance}
+Lo scopo è cercare di inferire informazioni utili per il Thing Descriptor a partire dagli Operation Handler. Il Thing Descriptor è composto da Actions e Properties. Ogni Property contiene indicazioni sul tipo di output. Per indicarlo è sufficiente aggiungere una tripla del tipo \textit{p rdf:type t}, dove \textit{p} è la proprietà e t è una sotto classe di \textit{jsonschema:DataSchema}. Il tipo di output può essere recuperato a partire dall'Operation Handler a cui la Property è legata attraverso la proprietà RDF \textit{<\#isPropertyAffordanceOfHandler>}. L'Operation Handler specifica il tipo di output attraverso la proprietà RDF \textit{<\#hasHandlerOuputType>}. I valori possibili sono object, array, string, number, integer, boolean, e null~\cite{WebofThi22:online}.\newline
+\noindent Esiste quindi una regola SWRL per ognuno di questi casi:
+
+\subsubsection{swrl-property-affordance-from-handler-object}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, "object")
+	->  jsonschema:ObjectSchema(?p)
+\end{minted}
+
+\subsubsection{swrl-property-affordance-from-handler-array}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, "array")
+	->  jsonschema:ArraySchema(?p)
+\end{minted}
+
+\subsubsection{swrl-property-affordance-from-handler-string}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, "string")
+	->  jsonschema:StringSchema(?p)
+\end{minted}
+
+\subsubsection{swrl-property-affordance-from-handler-number}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, "number")
+	->  jsonschema:NumberSchema(?p)
+\end{minted}
+
+\subsubsection{swrl-property-affordance-from-handler-integer}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, "integer")
+	->  jsonschema:IntegerSchema(?p)
+\end{minted}
+
+\subsubsection{swrl-property-affordance-from-handler-boolean}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, "boolean")
+	->  jsonschema:BooleanSchema(?p)
+\end{minted}
+
+\subsubsection{swrl-property-affordance-from-handler-null}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, "null")
+	->  jsonschema:NullSchema(?p)
+\end{minted}
+
+\subsection{Tipizzazione automatica delle Action Affordance}
+Lo scopo è praticamente lo stesso della sezione precedente. Anche ogni Action contiene indicazioni sul tipo di output, ma per indicarlo non è sufficiente aggiungere una tripla per specificare il tipo. Le informazioni sul tipo di output devono essere in questo caso contenute all'interno di un individuo, legato all'Action attraverso la properietà RDF \textit{td:hasOutputSchema}. Anche in questo caso il tipo di output può essere recuperato a partire dall'Operation Handler a cui la Property è legata attraverso la proprietà RDF \textit{<\#isActionAffordanceOfHandler>}. L'Operation Handler specifica il tipo di output attraverso la proprietà RDF \textit{<\#hasHandlerOuputType>}. Ancora una volta i valori possibili sono object, array, string, number, integer, boolean, e null.\newline
+Per la creazione di un nuovo individuo è stata utilizzata la SWRL Extensions built-in library~\cite{Extensio2:online}, che contiene built-in sperimentali. In particolare è stato utilizzato il built-in \textit{swrlx:makeOWLThing(?new,?ind)} che crea un nuovo individuo \textit{?new} per ogni \textit{?ind}.\newline
+\begin{warn}
+	Essendo la SWRL Extensions built-in library in fase sperimentale, non tutti i reasoner sono in grado di inferire le informazioni nel modo corretto. Anche Pellet fallisce in questa operazione lanciando un warning che avvisa di ignorare la regola:\newline\newline
+	\noindent \color{red}{WARNING} \color{black}\textit{: Ignoring rule RULE\_NAME]): No builtin for} \url{http://swrl.stanford.edu/ontologies/built-ins/3.3/swrlx.owl#makeOWLThing}.\newline\newline
+	\noindent Esistono comunque altri stumenti come Drools in grado di comprendere la regola e aggiungere le triple all'ontologia.
+\end{warn}
+\noindent Esiste quindi una regola SWRL per ognuno dei casi possibili:
+
+\subsubsection{swrl-action-affordance-from-handler-object}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, "object") ^
+swrlx:makeOWLThing(?i, ?a)
+	-> jsonschema:ObjectSchema(?i) ^ td:hasOutputSchema(?a, ?i)
+\end{minted}
+
+\subsubsection{swrl-action-affordance-from-handler-array}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, "array") ^
+swrlx:makeOWLThing(?i, ?a)
+	-> jsonschema:ArraySchema(?i) ^ td:hasOutputSchema(?a, ?i)
+\end{minted}
+
+\subsubsection{swrl-action-affordance-from-handler-string}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, "string") ^
+swrlx:makeOWLThing(?i, ?a)
+	-> jsonschema:StringSchema(?i) ^ td:hasOutputSchema(?a, ?i)
+\end{minted}
+
+\subsubsection{swrl-action-affordance-from-handler-number}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, "number") ^
+swrlx:makeOWLThing(?i, ?a)
+	-> jsonschema:NumberSchema(?i) ^ td:hasOutputSchema(?a, ?i)
+\end{minted}
+
+\subsubsection{swrl-action-affordance-from-handler-integer}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, "integer") ^
+swrlx:makeOWLThing(?i, ?a)
+	-> jsonschema:IntegerSchema(?i) ^ td:hasOutputSchema(?a, ?i)
+\end{minted}
+
+\subsubsection{swrl-action-affordance-from-handler-boolean}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, "boolean") ^
+swrlx:makeOWLThing(?i, ?a)
+	-> jsonschema:BooleanSchema(?i) ^ td:hasOutputSchema(?a, ?i)
+\end{minted}
+
+\subsubsection{swrl-action-affordance-from-handler-null}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+\begin{minted}{c}
+isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, "null") ^
+swrlx:makeOWLThing(?i, ?a)
+	-> jsonschema:NullSchema(?i) ^ td:hasOutputSchema(?a, ?i)
+\end{minted}
+
+\subsection{Generazione automatica del Form delle Interaction Affordance}
+Ogni Interaction Affordance nel Thing Descriptor possiede un form nella seguente forma:
+\begin{minted}{turtle}
+[
+	a td:Form ;
+	hctl:forContentType "application/json" ;
+	hctl:hasTarget "[EDGE_IP]/[HANDLER_NAME]?id=[COMPONENT_NAME]".
+]
+\end{minted}
+La proprietà \textit{hctl:forContentType} applica correttamente il valore \textit{"application/json"} ad ogni individuo del tipo \textit{<\#BrittanyForm>} grazie ad una \textit{owl:Restriction} di tipo \textit{owl:hasValue}.\newline
+\noindent Il passo rimanente è la generazione del valore corretto del target, ovvero l'indirizzo verso cui vengono effettuate le richieste. Si tratta di un elemento molto variabile che dipende da:
+\begin{enumerate}
+	\item L'indirizzo IP che acquisisce il dispositivo Edge;
+	\item Il nome dell'Operation Handler utilizzato dalla Interaction Affordance;
+	\item Il nome del componente su cui l'Interaction Affordance agisce.
+\end{enumerate}
+
+\subsubsection{swrl-td-form-generation}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+
+\begin{minted}{c}
+isInteractionAffordanceOf(?ia, ?td) ^ foaf:name(?td, ?ip) ^
+isInteractionAffordanceOfHandler(?ia, ?h3) ^ foaf:name(?h3, ?hn) ^
+interactsWithComponentHw(?ia, ?c) ^ foaf:name(?c, ?cn) ^
+swrlb:stringConcat(?fullText, ?ip, "/", ?hn, "?id=", ?cn) ^
+swrlx:makeOWLThing(?form, ?ia)
+	-> BrittanyForm(?form) ^ hctl:hasTarget(?form, ?fullText) ^
+	   td:hasForm(?td, ?form)
+\end{minted}
+In ordine questa regola SWRL effettua le seguenti computazioni:
+\begin{enumerate}
+	\item Per ogni InteractionAffordance viene recuperato il Thing Descriptor a cui è legata, in modo da estrapolare l'indirizzo IP del dispositivo Edge;
+	\item Viene recuperato l'Operation Handler legato alla InteractionAffordance, in modo da estrapolare il nome;
+	\item Viene recuperato il Componente Hardware con cui l'InteractionAffordance interagisce, in modo da recuperarne il nome;
+	\item Con le informazioni recuperate (indirizzo IP, nome dell'Operation Handler, nome del Componente Hardware) viene costruita una stringa che definisce in modo univoco il percorso dell'InteractionAffordance. Per farlo è stato utilizzato il built-in \textit{swrlb:stringConcat}~\cite{BuiltIns80:online};
+	\item Viene creato un nuovo individuo per ogni InteractionAffordance utilizzando di nuovo il built-in \textit{swrlx:makeOWLThing};
+	\item Ogni nuovo individuo creato viene tipizzato a \textit{<\#BrittanyForm>}, al quale viene aggiunto l'indirizzo generato attraverso la proprietà \textit{hctl:hasTarget}. Il form viene poi legato al Thing Descriptor attraverso la proprietà \textit{td:hasForm}
+\end{enumerate}
+Segue la lista delle variabili SWRL utilizzate per una maggior chiarezza:
+\begin{itemize}
+	\item \textbf{?ia}: Un individuo di tipo InteractionAffordance. Sono incluse sia le ActionAffordance che le PropertyAffordance. Essendo la forma del Form sempre la stessa non è necessaria una suddivisione in più regole.
+	\item \textbf{?td}: Il Thing Descriptor a cui è legata la InteractionAffordance.
+	\item \textbf{?ip}: L'indirizzo IP che è stata assegnato al dispositivo Edge;
+	\item \textbf{?h3}: L'Operation Handler a cui la InteractionAffordance è legata.
+	\item \textbf{?hn}: Il nome dell'Operation Handler a cui la InteractionAffordance è legata.
+	\item \textbf{?c}: Il Componente Hardware con cui la InteractionAffordance interagisce.
+	\item \textbf{?cn}: Il nome del Componente Hardware con cui la InteractionAffordance interagisce.
+	\item \textbf{?form}: Il Form generato.
+	\item \textbf{?fullText}: Il test completo dell'indirizzo generato.
+\end{itemize}

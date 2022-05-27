@@ -14,16 +14,20 @@ I Git hook sono script che vengono eseguiti per identificare potenziali problemi
 \noindent L'hook più importante però è \textit{gradle-task} che permette di lanciare il comando \textit{gradle test} prima di ogni commit.
 Per ora il task di test non fa altro che lanciare un ulteriore comando per validare il file RDF.
 
-\subsection{Validazione RDF}
-La validazione del file RDF avviene tramite un comando:
+\subsection{Gradle Task: test}
+Il task di gradle \textit{test} permette di validare il file RDF:
+\begin{minted}{bash}
+$ gradle test
+\end{minted}
+La validazione del file RDF avviene tramite un comando lanciato dal task di gradle:
 \begin{minted}{shell}
-turtle --validate brittany.ttl
+$ turtle --validate brittany.ttl
 \end{minted}
 Il comando è equivalente a:
 \begin{minted}{shell}
-riot --validate --syntax=ttl brittany.ttl
+$ riot --validate --syntax=ttl brittany.ttl
 \end{minted}
-Sia \textit{riot} che \textit{turtle} sono presenti nel framework Apache Jena~\cite{ApacheJe75:online}.
+Sia \textit{riot} che \textit{turtle} sono dipendenze del task, presenti nel framework Apache Jena~\cite{ApacheJe75:online}.
 
 \subsubsection{GitHub Workflow}
 Il workflow di GitHub è strutturato nel seguente modo:

@@ -1,110 +1,314 @@
 \section{Design}
 
-\subsection{Ubiquitous Language}
-Viene di seguito illustrato come è stato definito l’Ubiquitous Language utilizzato nel sistema.
-
-\noindent Viene riportato il solo sottoinsieme di componenti di interesse per il progetto RDF. Verranno riportati in questa relazione solo alcuni dei concetti significativi, in quanto RDF è la tecnologia più adatta a modellare e definire l'Ubiquitous Language, ed è quindi possibile approfondire visionando il documento \textit{brittany.ttl}. Tra parentesi viene riportato il nome in italiano.
-
-\begin{itemize}
-	\item \textbf{Greenhouse (Serra)}: Una struttura artificiale suddiviso in \textit{ambienti} costruita appositamente per coltivare \textit{piante}.
-	\item \textbf{Environment (Ambiente)}: Sezione di una \textit{serra} che contiene più \textit{piante}. Una \textit{serra} è composta da almeno un \textit{ambiente}.
-	\item \textbf{Plant (Pianta)}: Unità vegetale contenuta all’interno di un \textit{ambiente} della \textit{serra}.
-	\item \textbf{Edge (Edge)}: Una macchina elettronica che colleziona dati da \textit{sensori} e che può manipolare degli \textit{attuatori}. Un \textit{Edge} è composto da \textit{moduli}. Un \textit{Edge} può essere posizionato in un \textit{ambiente} o su una \textit{pianta}.
-	\item \textbf{Module (Module)}: Un componente logico che può essere aggiunto ad un \textit{Edge} ed è composto da più \textit{Operation Handler}.
-	\item \textbf{Operation Handler (Operation Handler)}: Un'operazione che utilizza degli argomenti per della computazione e ritorna un risultato.
-	\item \textbf{Hardware Component (Componente Hardware)}: Un Componente Hardware che può essere utilizzato da un Operation Handler.
-\end{itemize}
-
-\subsection{RDF e RDFS}
-
 \centeredImage{img/brittany-rdf-graph.png}{Diagramma sommario delle classi e delle proprietà (Struttura Principale)}{0.8}
 
 \noindent Il dominio è stato modellato utilizzando l'Ubiquitous Language appena illustrato. Sono stati inoltre ovviamente aggiunti elementi più di dettaglio e di basso livello, come le classi e le proprietà che fanno parte delle gerarchie "is a", più specifiche e per ora ancora mai nominate.
-\subsubsection{Concetti (Classi)}
+
+\noindent Questo grafico illustra solo le classi e le relazioni che fanno parte della struttura principale. In seguito vengono illustrate tutte le classi e tutte le proprietà. Le relazioni in giallo rappresentano le proprietà inverse di quelle in nero che hanno la freccia nel verso opposto.
+
+\subsection{Concetti (Classi)}
 Seguono gli identificatori delle classi create. Vengono riportate alcune note importanti. Dettagli più accurati ed approfonditi sono riportati nel file RDF \textit{brittany.ttl}:
 
-\paragraph{<\#Greenhouse>}
-Utilizzato per modellare il concetto di Serra.
-\paragraph{<\#Monitorable>}
-Utilizzato per modellare il concetto di un "qualcosa" che può essere controllato da una classe di tipo \textit{<\#Edge>}. \textit{<\#Environment>} e \textit{<\#Plant>} sono sottoclassi di questa classe.
-\paragraph{<\#Environment>}
-Utilizzato per modellare il concetto di Ambiente.
-\paragraph{<\#Plant>}
-Utilizzato per modellare il concetto di Pianta.
-\paragraph{<\#Edge>}
-Utilizzato per modellare il concetto di Edge.
-\paragraph{<\#Module>}
-Utilizzato per modellare il concetto di Modulo.
-\paragraph{<\#ComponentModule>}
-Si tratta di una specializzazione di \textit{<\#Module>} che agisce necessariamente su dei componenti hardware (\textit{<\#ComponentHw>}).
-\paragraph{<\#DigitalLightModule>}
-Una specializzazione di \textit{<\#ComponentModule>} che si occupa del sistema di illuminazione.
-\paragraph{<\#OperationHandler>}
-Utilizzato per modellare il concetto di Operation Handler.
-\paragraph{<\#ComponentOperationHandler>}
-Specializzazione di \textit{<\#OperationHandler>} che agisce necessariamente su dei componenti hardware (\textit{<\#ComponentHw>}).
-\paragraph{<\#ActionOperationHandler>}
-Specializzazione di \textit{<\#OperationHandler>} utilizzata per definire un'operazione che effettua un'azione.
-\paragraph{<\#PropertyOperationHandler>}
-Specializzazione di \textit{<\#OperationHandler>} utilizzata per definire un'operazione che ricava una proprietà.
-\paragraph{<\#DigitalLightHandler>}
-Specializzazione di \textit{<\#ComponentOperationHandler>} per definire operazioni legate al sistema di illuminazione.
-\paragraph{<\#IsOnDigitalLightHandler>}
-Specializzazione di \textit{<\#DigitalLightHandler>} e di \textit{<\#PropertyOperationHandler>}. L'operazione si occupa di verificare se un determinato componente che fa parte del sistema di illuminazione è acceso.
-\paragraph{<\#TurnOnDigitalLightHandler>}
-Specializzazione di \textit{<\#DigitalLightHandler>} e di \textit{<\#PropertyOperationHandler>}. L'operazione si occupa di accendere un determinato componente che fa parte del sistema di illuminazione.
-\paragraph{<\#TurnOffDigitalLightHandler>}
-Specializzazione di \textit{<\#DigitalLightHandler>} e di \textit{<\#PropertyOperationHandler>}. L'operazione si occupa di spegnere un determinato componente che fa parte del sistema di illuminazione.
-\paragraph{<\#ComponentHw>}
-Utilizzato per modellare il concetto di Componente Hardware.
-\paragraph{<\#SensorHw>}
-Specializzazione di \textit{<\#ComponentHw>}. Un componente che ricava dati dall'area circostante.
-\paragraph{<\#ActuatorHw>}
-Specializzazione di \textit{<\#ComponentHw>}. Un componente che agisce sull'area circostante.
-\paragraph{<\#DigitalLightHw>}
-Specializzazione di \textit{<\#ActuatorHw>}. Un attuatore che si occupa del sistema di illuminazione.
+\begin{itemize}
+	\item \textbf{<\#NameRestriction>}:Classe di tipo \textit{owl:Restriction}, non anonima perché riutilizzata da più classi;
 
-\subsubsection{Relazioni (Proprietà)}
-Seguono gli identificatori delle proprietà create. Vengono riportate alcune note importanti. Dettagli più accurati ed approfonditi sono riportati nel file RDF \textit{brittany.ttl}:
+	\item \textbf{<\#Greenhouse>}:Utilizzato per modellare il concetto di Serra;
 
-\paragraph{<\#hasEnvironments>}
-Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#Environment>} (almeno uno) all'interno di un \textit{<\#Greenhouse>}.
-\paragraph{<\#hasPlants>}
-Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#Plant>} all'interno di un \textit{<\#Environment>}.
-\paragraph{<\#monitor>}
-Proprietà utilizzata per modellare il fatto che un \textit{<\#Edge>} può essere posto in un qualsiasi \textit{<\#Monitorable>}.
-\paragraph{<\#monitorPlant>}
-Specializzazione di \textit{<\#monitor>} dedicata al monitor di un \textit{<\#Plant>}.
-\paragraph{<\#monitorEnvironment>}
-Specializzazione di \textit{<\#monitor>} dedicata al monitor di una \textit{<\#Environment>}.
-\paragraph{<\#hasComponents>}
-Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#ComponentHw>} (almeno uno) all'interno di un \textit{<\#ComponentModule>}.
-\paragraph{<\#hasModules>}
-Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#Module>} (almeno uno) all'interno di un \textit{<\#Edge>}.
-\paragraph{<\#edgeName>}
-Specializzazione di \textit{foaf:name} utilizzata per dare un nome ad un \textit{<\#Edge>}.
-\paragraph{<\#moduleName>}
-Specializzazione di \textit{foaf:name} utilizzata per dare un nome ad un \textit{<\#Module>}.
-\paragraph{<\#handlerName>}
-Specializzazione di \textit{foaf:name} utilizzata per dare un nome ad un \textit{<\#Handler>}.
-\paragraph{<\#componentName>}
-Specializzazione di \textit{foaf:name} utilizzata per dare un nome ad un \textit{<\#ComponentHw>}.
-\paragraph{<\#hasHandlers>}
-Proprietà utilizzata per modellare il fatto che esistono più \textit{<\#OperationHandler>} (almeno uno) all'interno di un \textit{<\#Module>}.
-\paragraph{<\#hasHandlerOutputType>}
-Proprietà utilizzata per definire il tipo di output fornito da un \textit{<\#OperationHandler>}.
-\paragraph{<\#hasHandlerInputSchema>}
-Proprietà utilizzata per definire quali tipi di dati possono essere forniti in input ad un \textit{<\#OperationHandler>}.
-\paragraph{<\#hasThingDescriptor>}
-Proprietà utilizzata per legare un \textit{<\#Edge>} al suo Thing Descriptor (\textit{td:Thing}).
+	\item \textbf{<\#Monitorable>}: Utilizzato per modellare il concetto di un "qualcosa" che può essere controllato da una classe di tipo \textit{<\#Edge>}. \textit{<\#Environment>} e \textit{<\#Plant>} sono sottoclassi di questa classe;
 
-\subsubsection{Individui}
-Sono stati realizzati degli individui di esempio.
+	\item \textbf{<\#Environment>}: Utilizzato per modellare il concetto di Ambiente;
 
-\noindent Nella serra che è stata creata (\textit{<\#angelo-greenhouse>}) è presente un solo ambiente (\textit{<\#angelo-environment>}) che contiene a sua volta una sola pianta (\textit{<\#angelo-basil>}).
+	\item \textbf{<\#Plant>}: Utilizzato per modellare il concetto di Pianta;
 
-\noindent Il dispositivo Edge che è stato creato (\textit{<\#angelo-edge>}) è composto da un solo modulo che gestisce l'illuminazione (\textit{<\#digital-light-module>}). Quest'ultimo è composto di tre Operation Handler: uno di tipo \textit{<\#IsOnDigitalLightHandler>}, uno di tipo \textit{<\#TurnOnDigitalLightHandler>} ed uno di tipo \textit{<\#TurnOffDigitalLightHandler>}
+	\item \textbf{<\#Edge>}: Utilizzato per modellare il concetto di Edge;
 
-\noindent Il modulo contiene due componenti di tipo <\#DigitalLightHw>, che sono proprio i componenti su cui possono interagire i tre Operation Handler appena nominati.
+	\item \textbf{<\#Module>}: Utilizzato per modellare il concetto di Modulo;
 
-\noindent Infine il dispositivo edge possiede un Thing Descriptor le cui ActionAffordance e PropertyAffordance sono mappate con quelle di tutti gli Operation Handler di tutti i Moduli che possiede.
+	\item \textbf{<\#ComponentModule>}: Si tratta di una specializzazione di \textit{<\#Module>} che agisce necessariamente su dei componenti hardware (\textit{<\#ComponentHw>});
+
+	\item \textbf{<\#DigitalLightModule>}: Una specializzazione di \textit{<\#ComponentModule>} che si occupa del sistema di illuminazione;
+
+	\item \textbf{<\#OperationHandler>}: Utilizzato per modellare il concetto di Operation Handler;
+
+	\item \textbf{<\#ComponentOperationHandler>}: Specializzazione di \textit{<\#OperationHandler>} che agisce necessariamente su dei componenti hardware (\textit{<\#ComponentHw>});
+
+	\item \textbf{<\#ActionOperationHandler>}: Specializzazione di \textit{<\#OperationHandler>} utilizzata per definire un'operazione che effettua un'azione;
+
+	\item \textbf{<\#PropertyOperationHandler>}: Specializzazione di \textit{<\#OperationHandler>} utilizzata per definire un'operazione che ricava una proprietà;
+
+	\item \textbf{<\#DigitalLightHandler>}: Specializzazione di \textit{<\#ComponentOperationHandler>} per definire operazioni legate al sistema di illuminazione;
+
+	\item \textbf{<\#IsOnDigitalLightHandler>}: Specializzazione di \textit{<\#DigitalLightHandler>} e di \textit{<\#PropertyOperationHandler>}. L'operazione si occupa di verificare se un determinato componente che fa parte del sistema di illuminazione è acceso.
+
+	\item \textbf{<\#TurnOnDigitalLightHandler>}: Specializzazione di \textit{<\#DigitalLightHandler>} e di \textit{<\#PropertyOperationHandler>}. L'operazione si occupa di accendere un determinato componente che fa parte del sistema di illuminazione;
+
+	\item \textbf{<\#TurnOffDigitalLightHandler>}: Specializzazione di \textit{<\#DigitalLightHandler>} e di \textit{<\#PropertyOperationHandler>}. L'operazione si occupa di spegnere un determinato componente che fa parte del sistema di illuminazione;
+
+	\item \textbf{<\#ComponentHw>}: Utilizzato per modellare il concetto di Componente Hardware;
+
+	\item \textbf{<\#SensorHw>}: Specializzazione di \textit{<\#ComponentHw>}. Un componente che ricava dati dall'area circostante;
+
+	\item \textbf{<\#ActuatorHw>}: Specializzazione di \textit{<\#ComponentHw>}. Un componente che agisce sull'area circostante;
+
+	\item \textbf{<\#DigitalLightHw>}: Specializzazione di \textit{<\#ActuatorHw>}. Un attuatore che si occupa del sistema di illuminazione;
+
+	\item \textbf{<\#BrittanyThingDescriptor>}: Specializzazione di \textit{td:Thing}. Un Thing Descriptor che ha alcune proprietà sempre dello stesso tipo. Brittany utilizza infatti sempre alcuni tipi di valori e questa classe permette di porre quei vincoli.
+
+	\item \textbf{<\#BrittanyForm>}: Specializzazione di \textit{td:Form}. Un Form che ha ha alcune proprietà sempre dello stesso tipo.
+
+\end{itemize}
+
+\subsection{Relazioni (Proprietà)}
+Seguono gli identificatori delle proprietà create. Vengono riportate alcune note importanti. Dettagli più accurati ed approfonditi sono riportati nel file RDF \textit{brittany.ttl}.
+
+\definecolor{yellow(munsell)}{rgb}{0.65, 0.50, 0.0}
+\newcommand\boldYellow[1]{\textcolor{yellow(munsell)}{\textbf{#1}}}
+
+\subsubsection{ObjectProperty}
+Vengono ora elencate le ObjectProperty, ossia le proprietà il cui range deve essere necessariamente un individuo.
+\begin{itemize}
+	\item \textbf{<\#hasEnvironment>}: Proprietà utilizzata per modellare il fatto all'interno di \textit{<\#Greenhouse>} c'è un \textit{<\#Environment>};
+
+	\item \boldYellow{<\#isEnvironmentOf>}: Proprietà inversa di \textit{<\#hasEnvironments>};
+
+	\item \textbf{<\#hasPlant>}: Proprietà utilizzata per modellare il fatto che in uno spazio è presente una  \textit{<\#Plant>};
+
+	\item \boldYellow{<\#isPlantIn>}: Proprietà inversa di \textit{<\#hasPlant>};
+
+	\item \textbf{<\#hasEnvironmentPlant>}: Specializzazione di \textit{<\#hasPlant>}, utilizzata per modellare il fatto che in un \textit{<\#Environment>} è presente una  \textit{<\#Plant>};
+
+	\item \boldYellow{<\#isPlantInEnvironment>}: Proprietà inversa di \textit{<\#hasEnvironmentPlant>};
+
+	\item \textbf{<\#hasGreenhousePlant>}: Specializzazione di \textit{<\#hasPlant>}, utilizzata per modellare il fatto che in una \textit{<\#Greenhouse>} è presente una  \textit{<\#Plant>};
+
+	\item \boldYellow{<\#isPlantInGreenhouse>}: Proprietà inversa di \textit{<\#hasGreenhousePlant>};
+
+	\item \textbf{<\#hasGreenhouseEdge>}: Proprietà utilizzata per modellare il fatto che in una \textit{<\#Greenhouse>} è presente un \textit{<\#Edge>};
+
+	\item \boldYellow{<\#isEdgeInGreenhouse>}: Proprietà inversa di \textit{<\#hasGreenhouseEdge>};
+
+	\item \textbf{<\#hasModule>}: Proprietà utilizzata per modellare il fatto che è presente un \textit{<\#Module>} all'interno di un \textit{<\#Edge>};
+
+	\item \boldYellow{<\#isModuleIn>}: Proprietà inversa di \textit{<\#hasModule>};
+
+	\item \textbf{<\#hasHandler>}: Proprietà utilizzata per modellare il fatto che esiste un \textit{<\#OperationHandler>} all'interno di un \textit{<\#Module>};
+
+	\item \boldYellow{<\#isHandlerIn>}: Proprietà inversa di \textit{<\#hasHandler>};
+
+	\item \textbf{<\#monitor>}: Proprietà utilizzata per modellare il fatto che un \textit{<\#Edge>} può essere posto in un qualsiasi \textit{<\#Monitorable>};
+
+	\item \boldYellow{<\#isMonitored>}: Proprietà inversa di \textit{<\#monitor>};
+
+	\item \textbf{<\#monitorPlant>}: Specializzazione di \textit{<\#monitor>} dedicata al monitor di un \textit{<\#Plant>};
+
+	\item \boldYellow{<\#isPlantMonitored>}: Proprietà inversa di \textit{<\#monitorPlant>};
+
+	\item \textbf{<\#monitorEnvironment>}: Specializzazione di \textit{<\#monitor>} dedicata al monitor di una \textit{<\#Environment>};
+
+	\item \boldYellow{<\#isEnvironmentMonitored>}: Proprietà inversa di \textit{<\#monitorEnvironment>};
+
+	\item \textbf{<\#hasComponentHw>}: Proprietà utilizzata per modellare il fatto che qualcosa possiede un \textit{<\#ComponentHw>};
+
+	\item \boldYellow{<\#isComponentHwIn>}: Proprietà inversa di \textit{<\#hasComponentHw>};
+
+	\item \textbf{<\#hasSensorHw>}: Specializzazione di \textit{<\#hasComponentHw>} utilizzata per modellare il fatto che qualcosa possiede un \textit{<\#SensorHw>};
+
+	\item \boldYellow{<\#isSensorHwIn>}: Proprietà inversa di \textit{<\#hasSensorHw>};
+
+	\item \textbf{<\#hasActuatorHw>}: Specializzazione di \textit{<\#hasComponentHw>} utilizzata per modellare il fatto che qualcosa possiede un \textit{<\#ActuatorHw>};
+
+	\item \boldYellow{<\#isActuatorHwIn>}: Proprietà inversa di \textit{<\#hasActuatorHw>};
+
+	\item \textbf{<\#hasDigitalLightHw>}: Specializzazione di \textit{<\#hasActuatorHw>} utilizzata per modellare il fatto che qualcosa possiede un \textit{<\#DigitalLightHw>};
+
+	\item \boldYellow{<\#isDigitalLightHwIn>}: Proprietà inversa di \textit{<\#hasDigitalLightHw>};
+
+\begin{info}[owns:]
+	La parola chiave "owns" è stata utilizzata per contraddistinguere tutte le proprietà il cui dominio è un \textbf{<\#ComponentModule>}.
+\end{info}
+
+	\item \textbf{<\#ownsComponentHw>}: Specializzazione di \textit{<\#hasComponentHw>} per modellare il fatto che un <\#ComponentModule> possiede un \textit{<\#ComponentHw>};
+
+	\item \boldYellow{<\#isOwnedComponentHw>}: Proprietà inversa di \textit{<\#ownsComponentHw>};
+
+	\item \textbf{<\#ownsSensorHw>}: Specializzazione di \textit{<\#ownsComponentHw>} e di \textit{<\#hasSensorHw>} utilizzata per modellare il fatto che un <\#ComponentModule> possiede un \textit{<\#SensorHw>};
+
+	\item \boldYellow{<\#isOwnedSensorHw>}: Proprietà inversa di \textit{<\#ownsSensorHw>};
+
+	\item \textbf{<\#ownsActuatorHw>}: Specializzazione di \textit{<\#ownsComponentHw>} e di \textit{<\#hasActuatorHw>} utilizzata per modellare il fatto che un <\#ComponentModule> possiede un \textit{<\#ActuatorHw>};
+
+	\item \boldYellow{<\#isOwnedActuatorHw>}: Proprietà inversa di \textit{<\#ownsActuatorHw>};
+
+	\item \textbf{<\#ownsDigitalLightHw>}: Specializzazione di \textit{<\#ownsActuatorHw>} e di \textit{<\#hasDigitalLightHw>} utilizzata per modellare il fatto che un <\#ComponentModule> possiede un \textit{<\#DigitalLightHw>};
+
+	\item \boldYellow{<\#isOwnedDigitalLightHw>}: Proprietà inversa di \textit{<\#ownsDigitalLightHw>};
+
+\begin{info}[collect:]
+	La parola chiave "collect" è stata utilizzata per contraddistinguere tutte le proprietà il cui dominio è un \textbf{<\#Edge>}.
+\end{info}
+
+	\item \textbf{<\#collectComponentHw>}: Specializzazione di \textit{<\#hasComponentHw>} utilizzata per modellare il fatto che un <\#Edge> possiede un \textit{<\#ComponentHw>};
+
+	\item \boldYellow{<\#isCollectedComponentHw>}: Proprietà inversa di \textit{<\#collectComponentHw>};
+
+	\item \textbf{<\#collectSensorHw>}: Specializzazione di \textit{<\#collectComponentHw>} e di \textit{<\#hasSensorHw>} utilizzata per modellare il fatto che un <\#Edge> possiede un \textit{<\#SensorHw>};
+
+	\item \boldYellow{<\#isCollectedSensorHw>}: Proprietà inversa di \textit{<\#collectSensorHw>};
+
+	\item \textbf{<\#collectActuatorHw>}: Specializzazione di \textit{<\#collectComponentHw>} e di \textit{<\#hasActuatorHw>} utilizzata per modellare il fatto che un <\#Edge> possiede un \textit{<\#ActuatorHw>};
+
+	\item \boldYellow{<\#isCollectedActuatorHw>}: Proprietà inversa di \textit{<\#collectActuatorHw>};
+
+	\item \textbf{<\#collectDigitalLightHw>}: Specializzazione di \textit{<\#collectActuatorHw>} e di \textit{<\#hasDigitalLightHw>} utilizzata per modellare il fatto che un <\#Edge> possiede un \textit{<\#DigitalLightHw>};
+
+	\item \boldYellow{<\#isCollectedDigitalLightHw>}: Proprietà inversa di \textit{<\#collectDigitalLightHw>};
+
+\begin{info}[handle:]
+	La parola chiave "handle" è stata utilizzata per contraddistinguere tutte le proprietà il cui dominio è un \textbf{<\#ComponentOperationHandler>}.
+\end{info}
+
+	\item \textbf{<\#handleComponentHw>}: Specializzazione di \textit{<\#hasComponentHw>} utilizzata per modellare il fatto che un <\#ComponentOperationHandler> agisce su un \textit{<\#ComponentHw>};
+
+	\item \boldYellow{<\#isHandledComponentHw>}: Proprietà inversa di \textit{<\#handleComponentHw>};
+
+	\item \textbf{<\#handleSensorHw>}: Specializzazione di \textit{<\#handleComponentHw>} e di \textit{<\#hasSensorHw>} utilizzata per modellare il fatto che un <\#ComponentOperationHandler> agisce su un \textit{<\#SensorHw>};
+
+	\item \boldYellow{<\#isHandledSensorHw>}: Proprietà inversa di \textit{<\#handleSensorHw>};
+
+	\item \textbf{<\#handleActuatorHw>}: Specializzazione di \textit{<\#handleComponentHw>} e di \textit{<\#hasActuatorHw>} utilizzata per modellare il fatto che un <\#ComponentOperationHandler> agisce su \textit{<\#ActuatorHw>};
+
+	\item \boldYellow{<\#isHandledActuatorHw>}: Proprietà inversa di \textit{<\#handleActuatorHw>};
+
+	\item \textbf{<\#handleDigitalLightHw>}: Specializzazione di \textit{<\#handleActuatorHw>} e di \textit{<\#hasDigitalLightHw>} utilizzata per modellare il fatto che un <\#ComponentOperationHandler> agisce su un \textit{<\#DigitalLightHw>};
+
+	\item \boldYellow{<\#isHandledDigitalLightHw>}: Proprietà inversa di \textit{<\#handleDigitalLightHw>};
+
+	\item \textbf{<\#hasHandlerInteractionAffordance>}:  Proprietà utilizzata per modellare il fatto che un <\#OperationHandler> è collegato ad una Property Affordance \textit{(td:PropertyAffordance)};
+
+	\item \boldYellow{<\#isInteractionAffordanceOfHandler>}: Proprietà inversa di \textit{<\#hasHandlerInteractionAffordance>};
+
+	\item \textbf{<\#hasHandlerPropertyAffordance>}: Specializzazione di \textit{<\#hasHandlerInteractionAffordance>} utilizzata per modellare il fatto che un <\#OperationHandler> è collegato ad una Property Affordance \textit{(td:PropertyAffordance)};
+
+	\item \boldYellow{<\#isPropertyAffordanceOfHandler>}: Proprietà inversa di \textit{<\#hasHandlerPropertyAffordance>};
+
+	\item \textbf{<\#hasHandlerActionAffordance>}: Specializzazione di \textit{<\#hasHandlerInteractionAffordance>} utilizzata per modellare il fatto che un <\#OperationHandler> è collegato ad una Action Affordance \textit{(td:ActionAffordance)};
+
+	\item \boldYellow{<\#isActionAffordanceOfHandler>}: Proprietà inversa di \textit{<\#hasHandlerActionAffordance>};
+
+	\item \textbf{<\#hasHandlerInputSchema>}: Proprietà utilizzata per definire quali tipi di dati possono essere forniti in input ad un \textit{<\#OperationHandler>};
+
+	\item \boldYellow{<\#isInputSchemaOfHandler>}: Proprietà inversa di \textit{<\#hasHandlerInputSchema>};
+
+	\item \textbf{<\#hasThingDescriptor>}: Proprietà utilizzata per legare un \textit{<\#Edge>} al suo Thing Descriptor (\textit{<\#BrittanyThingDescriptor>});
+
+	\item \boldYellow{<\#isThingDescriptor>}: Proprietà inversa di \textit{<\#hasThingDescriptor>};
+
+	\item \boldYellow{<\#isInteractionAffordanceOf>}: Proprietà inversa di \textit{td:hasInteractionAffordance};
+
+	\item \boldYellow{<\#isPropertyAffordanceOf>}: Proprietà inversa di \textit{td:hasPropertyAffordance};
+
+	\item \boldYellow{<\#isActionAffordanceOf>}: Proprietà inversa di \textit{td:hasActionAffordance}.
+
+\end{itemize}
+
+\subsubsection{DatatyeProperty}
+\begin{itemize}
+	\item \textbf{foaf:name}: Proprietà utilizzata per definire il nome di risorse;
+
+	\item \textbf{wot:href}: Superproprietà di \textit{hctl:hasTarget} utilizzata per specificare degli URL;
+
+	\item \textbf{hctl:hasTarget}: Proprità utilizzata per definite un path all'interno di un Form del Thing Descriptor;
+
+	\item \textbf{hctl:forContentType}: Proprietà utilizzata per definire in che modo i dati vengono scambiati nelle Interaction Affordance \textit{(td:InteractionAffordance)};
+
+	\item \textbf{<\#hasHandlerOutputType>}: Proprietà utilizzata per definire il tipo di output fornito da un \textit{<\#OperationHandler>}.
+\end{itemize}
+
+\subsection{Individui}
+Sono stati realizzati degli individui di esempio:\newline
+
+\noindent Sono stati creati innanzitutto due individui di tipo \textit{foaf:Person}, \textit{<\#angelo-filaseta>} e \textit{<\#giorgia-savo>}.\newline
+
+\noindent Per ciascuno degli individui è stata creata una serra, rispettivamente \textit{<\#angelo-greehouse>} e \textit{<\#giorgia-greenhouse>}. La creazione degli individui di tipo persona e il legame alle serre attraverso la proprietà \textit{dbo:owner} non è necessaria ma è stata creata per rendere più chiaro il dominio.\newline
+
+\noindent Nella serra (\textit{<\#angelo-greenhouse>}) sono presenti due ambienti (\textit{<\#angelo-environment-one>} , \textit{<\#angelo-environment-two>}) che a loro volta contengono rispettivamente le piante \{\textit{<\#angelo-basil>}, \textit{<\#angelo-tomato>}, \textit{<\#angelo-parsley>}\} e \{\textit{<\#angelo-onion>}, \textit{<\#angelo-lettuce>})\}.\newline
+
+\noindent Nella serra (\textit{<\#giorgia-greenhouse>}) è presente un solo ambiente (\textit{<\#giorgia-environment>}) che contiene le piante \{\textit{<\#giorgia-cucumber>, <\#giorgia-potato>})\}. \newline
+
+\noindent Entrambe le serre contengono un dispositivo Edge, rispettivamente \textit{<\#angelo-edge>} e \textit{<\#giorgia-edge>}. Entrambi gli Edge contengono un solo modulo di tipo \textit{<\#DigitalLightModule>}. La configurazione è la stessa:
+\begin{enumerate}
+	\item Il nome dell'individuo che rappresenta il modulo è \textit{<\#NOME-edge-module-digital-light>};
+	\item Ognuno ha a disposizione i tre handler \textit{<\#NOME-handler-turn-on-digital-light>}, \textit{<\#NOME-handler-turn-off-digital-light>}, \textit{<\#NOME-handler-is-on-digital-light>};
+\end{enumerate}
+La differenza è che gli handler \textit{<\#angelo-..>} hanno due individui di tipo \textit{<\#DigitalLightHw>} collegati (\textit{<\#angelo-digital-light-sx>} e \textit{<\#angelo-digital-light-sx>}) mentre quelli \textit{<\#giorgia-..>} ne hanno solo uno (\textit{<\#giorgia-digital-light-center>}).\newline
+
+\noindent Infine entrambi gli individui di tipo \textit{<\#Edge>} sono collegati ad un individuo di tipo \textit{<\#BrittanyThingDescriptor>}, rispettivamente \textit{<\#angelo-td-mock-ip>} e \textit{<\#giorgia-td-mock-ip>} le cui ActionAffordance e PropertyAffordance sono mappate con quelle di tutti gli Operation Handler di tutti i Moduli posseduti.
+
+\subsection{Restrizioni}
+\subsubsection{Cardinalità}
+Vengono ora elencate tutte le restrizioni sulle cardinalità presenti in Brittany RDF:
+\begin{itemize}
+	\item \textbf{<\#Greenhouse>}:
+	\begin{itemize}
+		\item Esattamente un \textit{foaf:name};
+		\item Almeno un \textit{<\#Environment>} legato attraverso la proprietà \textit{<\#hasEnvironment>};
+	\end{itemize}
+	\item \textbf{<\#Edge>}:
+	\begin{itemize}
+		\item Esattamente un \textit{<\#BrittanyThingDescriptor>} legato attraverso la proprietà \textit{<\#hasThingDescriptor>};
+		\item Almeno un \textit{<\#Module>} legato attraverso la proprietà \textit{<\#hasModule>};
+	\end{itemize}
+	\item \textbf{<\#Module>}:
+	\begin{itemize}
+		\item Esattamente un \textit{foaf:name};
+		\item Almeno un \textit{<\#OperationHandler>} legato attraverso la proprietà \textit{<\#hasHandler>};
+	\end{itemize}
+	\item \textbf{<\#OperationHandler>}:
+	\begin{itemize}
+		\item Esattamente un \textit{foaf:name};
+	\end{itemize}
+	\item \textbf{<\#ComponentHw>}:
+	\begin{itemize}
+		\item Esattamente un \textit{foaf:name}.
+	\end{itemize}
+\end{itemize}
+\subsubsection{Valori}
+Vengono ora elencate tutte le restrizioni sui valori presenti in Brittany RDF:
+\begin{itemize}
+	\item \textbf{<\#DigitalLightModule>}:
+	\begin{itemize}
+		\item Ogni individuo ha una proprietà \textit{foaf:name} con valore \textit{"digital-light"};
+	\end{itemize}
+	\item \textbf{<\#IsOnDigitalLightHandler>}:
+		\begin{itemize}
+		\item Ogni individuo ha una proprietà \textit{foaf:name} con valore \textit{"isOn"};
+		\item Ogni individuo ha una proprietà \textit{<\#hasHandlerOutputType>} con valore \textit{"boolean"};
+	\end{itemize}
+	\item \textbf{<\#TurnOnDigitalLightHandler>}:
+	\begin{itemize}
+		\item Ogni individuo ha una proprietà \textit{foaf:name} con valore \textit{"turnOn"};
+		\item Ogni individuo ha una proprietà \textit{<\#hasHandlerOutputType>} con valore \textit{"string"};
+	\end{itemize}
+	\item \textbf{<\#TurnOffDigitalLightHandler>}:
+	\begin{itemize}
+		\item Ogni individuo ha una proprietà \textit{foaf:name} con valore \textit{"turnOff"};
+		\item Ogni individuo ha una proprietà \textit{<\#hasHandlerOutputType>} con valore \textit{"string"};
+	\end{itemize}
+	\item \textbf{<\#BrittanyThingDescriptor>}:
+	\begin{itemize}
+		\item Ogni individuo ha una proprietà \textit{td:definesSecurityScheme} con valore \textit{<\#nosec-schema>};
+		\item Ogni individuo ha una proprietà \textit{td:hasSecurityConfiguration} con valore \textit{<\#no-sec>};
+	\end{itemize}
+	\item \textbf{<\#BrittanyForm>}:
+	\begin{itemize}
+		\item Ogni individuo ha una proprietà \textit{hctl:forContentType} con valore \textit{"application/json"}.
+	\end{itemize}
+\end{itemize}
+\subsection{Osservazioni aggiuntive}
+\subsubsection{Design del Thing Descriptor}
+Il Thing Descriptor è stato pensato per essere utilizzato principalmente in formato JSON-LD. Il funzionamento non subisce nessun tipo di impatto se cambia anche il tipo di codifica, in quanto è sempre possibile un'operazione di conversione. È però fondamentale che la struttura del Thing Descriptor rimanga invariata. I nomi delle proprietà utilizzate sono mantenute nella W3 Thing Descriptor Ontology~\cite{ThingDes54:online}.\newline
+\noindent Esistono tuttavia degli elementi che non è necessario aggiungere alla nuova implementazioni di Thing Descriptor. Rispetto alla versione illustrata nella sottosezione \ref{tdform} non è più necessario aggiungere il campo \textit{"modules"}, ed è anche possibile rimuovere tutti i campi "module" in ogni Interaction Affordance.\newline
+Utilizzando RDF è ora possibile risalire a queste informazioni a partire dalle informazioni già contenute nel TD.
+\begin{warn}
+	È però necessario assumere che nella versione finale ed integrata del sistema Brittany questi dati saranno accessibili e utilizzabili in qualche modo dal microservizio \textit{"Greenhouse Core"}.
+\end{warn}

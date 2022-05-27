@@ -1,0 +1,41 @@
+\section{SPARQL Query}
+\subsection{Metodo utilizzato}
+Le query sviluppate funzionano correttamente solo sull'ontologia che contiene anche tutte le triple che sono state inferite oltre a quelle inserite.
+
+\subsubsection{Gradle Task: query}
+\noindent È possibile eseguire le query attraverso Protege, oppure attraverso il task di gradle creato appositamente:
+
+\begin{minted}{bash}
+$ gradle query -Parg=QUERY_NAME
+
+# es: $ gradle query -Parg=plant_list
+\end{minted}
+
+\noindent Per poter eseguire il task sono necessarie le dipendenze Apache Jena~\cite{ApacheJe75:online} e Pellet~\cite{AURenpel94:online}.
+\subsection{Query sviluppate}
+È possibile consultare il sorgente delle query. I file sono contenuti all'interno della cartella \textit{"query"}. Seguono una breve descrizione e degli esempi di output per ciascuna.
+\subsubsection{td\_all\_info}
+\paragraph{Descrizione}
+Elenca tutte le InteractionAffordance per ogni dispositivo Edge. Inoltre ritorna il tipo dell'InteractionAffordance (superclasse) e l'Operation Handler ad essa legata.
+\centeredImage{img/td\_all\_info.png}{Esempio di output per la query: td\_all\_info}{1}
+\subsubsection{plant\_list}
+\paragraph{Descrizione}
+Elenca tutte le Piante contenute in ogni ambiente Per ogni Serra.
+\centeredImage{img/plant\_list.png}{Esempio di output per la query: plant\_list}{0.65}
+
+\subsubsection{plant\_count\_env}
+\paragraph{Descrizione}
+Stampa il numero di piante presenti in ogni ambiente, insieme alla serra in cui esse sono situate.
+\centeredImage{img/plant\_count\_env.png}{Esempio di output per la query: plant\_count\_env}{0.65}
+
+\subsubsection{plant\_count\_gh}
+Stampa il numero di piante presenti in ogni serra.
+\centeredImage{img/plant\_count\_gh.png}{Esempio di output per la query: plant\_count\_gh}{0.38}
+
+\subsubsection{edge\_location}
+Stampa la lista di tutti gli Edge del sistema e per ciascuno è affiancato il Monitorable su cui sono piazzati.
+\centeredImage{img/edge\_location.png}{Esempio di output per la query: edge\_location}{0.55}
+
+\subsubsection{componentHw\_location}
+Stampa una lista in cui compaiono tutti i Componenti Hardware. Per ciascuno viene riportato dove sono piazzati, seguendo la catena: \textit{edge} $\rightarrow$ optional(\textit{plant}) $\rightarrow$ \textit{environment} $\rightarrow$ \textit{greenhouse}.
+\centeredImage{img/componentHw\_location.png}{Esempio di output per la query: componentHw\_location}{1}

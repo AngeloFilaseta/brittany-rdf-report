@@ -1,6 +1,15 @@
-\section{Requisiti}
+\section{Brittany RDF}
+\subsection{Scope del progetto}
+Il sistema "Brittany", anche se completo, può essere ampliato e migliorato. Scopo del progetto "Brittany RDF" è rappresentare parte della struttura del dominio e le varie relazioni tra i componenti, che infatti non sono attualmente mantenute in nessun modo. Questo passo permetterebbe un'integrazione tra i due progetti per rendere il sistema più stabile, preciso e semplice.
 
-\subsection{Requisiti Funzionali}
+\subsubsection{Parte del dominio presa in considerazione per Brittany RDF}
+\noindent La parte del dominio che è interessante da rappresentare e formalizzare è quella inerente ai dispositivi di tipo "Edge". Si tratta della parte del sistema più Core e dunque più ricca di concetti. \newline
+Anche i parametri di configurazione di cui si occupa "Settings Service" sarebbero stati interessanti, ma sono già stati modellati accuratamente utilizzando altre tecnologie e sono stati quindi per ora esclusi.
+
+\centeredImage{img/represent.png}{Parte del sistema "Brittany" presa in considerazione per il progetto corrente}{0.7}
+\subsection{Requisiti}
+
+\subsubsection{Requisiti Funzionali}
 
 I requisiti funzionali riguardano le funzionalità che il sistema deve mettere a disposizione all’utente.
 
@@ -14,15 +23,20 @@ I requisiti funzionali riguardano le funzionalità che il sistema deve mettere a
 	\item definire quali operazioni può eseguire ciascun modulo e su quali componenti hardware all'interno della serra.
 \end{enumerate}
 
-\subsection{Requisiti Non Funzionali}
+\subsubsection{Requisiti Non Funzionali}
 I requisiti non funzionali riguardano le funzionalità che il sistema non deve necessariamente possedere per fare in modo che sia funzionante e corretto.\newline
 
 \noindent La rappresentazione del sistema deve essere di facile intuizione, documentata e descritta accuratamente, in modo che sia semplice da utilizzare.\newline
 
 \noindent Devono essere rispettate le convenzioni delle tecnologie che verranno usate.
 
-\subsection{Requisiti Implementativi}
+\subsubsection{Requisiti Implementativi}
 
 I requisiti di implementazione vincolano l’intera fase di realizzazione del sistema, ad esempio richiedendo l’uso di uno specifico linguaggio di programmazione e/o di uno specifico tool software.
 
-\noindent Per lo sviluppo di questo progetto si è vincolati ad utilizzare le tecnologie \textbf{RDF} e \textbf{RDF Schema}.
+\noindent Per lo sviluppo di questo progetto si è vincolati ad utilizzare le tecnologie:
+\begin{itemize}
+	\item \textbf{RDF}, \textbf{RDF Schema} e \textbf{OWL}: per la modellazione del dominio;
+	\item \textbf{SPARQL}: per l'interrogazione dell'ontologia creata;
+	\item \textbf{SWRL}: per esprimere regole di logica aggiuntive.
+\end{itemize}

@@ -1,7 +1,8 @@
-\section{Descrizione del dominio di "Brittany"}
+\section{Brittany}
+In questa sezione vengono riportate alcune informazioni che descrivono sommariamente come funziona il sistema "Brittany". La documentazione completa è consultabile al link \url{https://tale152.github.io/brittany/}~\cite{Brittany65:online}.\newline
+In questo report verranno citate solo alcune delle informazioni più importanti atte a far capire perché nel progetto "Brittany RDF" sono state prese certe decisione a discapito di altre.
 
 \subsection{Scope del progetto}
-
 Brittany è un sistema di serre il cui scopo è automatizzare il più possibile i processi di crescita di alcune piante.
 
 \noindent Il sistema è composto da dispositivi edge che monitorano la situazione delle piante e dell'ambiente circostante (tramite sensori) ed eventualmente vi agiscono (tramite attuatori). Ogni edge dispone di funzionalità che dipendono dall'hardware a cui essi sono collegati.
@@ -9,6 +10,7 @@ I dati che vengono campionati vengono raccolti in una base di dati. Gli utenti p
 
 \subsection{Descrizione ad alto livello del sistema}
 Brittany è un sistema suddiviso in micro servizi:
+\centeredImage{img/architecture.png}{Architettura del sistema "Brittany"}{0.7}
 \begin{itemize}
 	\item \textbf{Edge}: Si tratta del componente che manipola i sensori e gli attuatori all’interno degli ambienti della serra. In un ambiente possono esserci più Edge;
 	\item \textbf{Greenhouse Core}: Si tratta di un ambiente in cui degli agenti hanno un loro lifecycle, agiscono sugli Edge e contattano i Service qualora necessario.
@@ -19,10 +21,121 @@ Brittany è un sistema suddiviso in micro servizi:
 \end{itemize}
 Greenhouse core deve necessariamente essere collocato nella stessa rete LAN in cui si trovano gli apparecchi di tipo Edge.
 
-\centeredImage{img/architecture.png}{Architettura del sistema "Brittany"}{0.7}
+\subsection{Interazione con Edge: Thing Descriptor}
+Un Thing Descriptor (TD, o W3C WoT Thing Descriptor) è un modello di rappresentazione royalty-free basato sul linguaggio JSON ed utilizzato nell Internet of Things (IoT). Il TD fornisce un modo univoco per descrive un oggetto o un servizio, in funzione delle sue capacità, dei protocolli che usa, ed altri metadati. Usare un Thing Descriptor semplifica notevolmente l’integrazione di dispositivi IoT all’interno di sistemi che ne fanno uso. Ogni Edge dispone di un sistema di generazione del TD automatico in base alla configurazione che possiede.
 
-\subsubsection{Parte del dominio presa in considerazione per Brittany RDF}
-\noindent La parte del dominio che è interessante da rappresentare e formalizzare è quella inerente ai dispositivi di tipo "Edge". Si tratta della parte del sistema più Core e dunque più ricca di concetti. \newline
-Anche i parametri di configurazione di cui si occupa "Settings Service" sarebbero stati interessanti, ma sono già stati modellati accuratamente utilizzando altre tecnologie e sono stati quindi per ora esclusi.
+\subsubsection{Struttura del Thing Descriptor}
+La seguente è una configurazione hardware valida di un edge che comanda due luci:
 
-\centeredImage{img/represent.png}{Parte del sistema "Brittany" presa in considerazione per il progetto corrente}{0.7}
+\centeredImage{img/conftd.png}{Esempio di una configurazione hardware di Edge
+}{0.20}
+\noindent In questo caso Edge è composto da due componenti, una luce verde (denotiamo con G) e una luce rossa (denotiamo con R). Il Thing Descriptor è quindi stato strutturato come segue:
+\begin{itemize}
+	\item Ogni Edge possiede un Thing Descriptor che viene creato dinamicamente in funzione dei componenti che possiede.
+	\item Dato che un Edge è composto da Moduli che sono a loro volta costituiti da componenti e operazioni, è possibile costruire il Thing Descriptor mano a mano che vengono aggiunti moduli.
+	\item Esiste un'Interaction Affordance per ogni coppia del tipo (Operation Handler - Componente del Modulo su cui l'Operation Handler può agire)
+\end{itemize}
+
+\paragraph{Forma del Thing Descriptor}
+\label{tdform}
+Il Thing Descriptor non è altro che un oggetto Json in grado di supportare anche la sintassi JSON-LD che utilizza però delle precise convenzioni, descritte approfonditamente sul sito di W3. Viene qui riportato un breve sommario di come è stato strutturato il Thing Descriptor di Edge:
+\begin{itemize}
+	\item \textbf{@context}: Il campo è necessario e serve a definire lo standard in uso.
+	\item \textbf{id}: Il campo è obbligatorio e di tipo stringa. Un identificativo univoco viene assegnato a Edge, di base si tratta dell’indirizzo IP.
+	\item \textbf{title}: Si tratta di una descrizione sommaria di ciò che può fare Edge. Deve essere human readable.
+	\item \textbf{security}: specifica quale securityDefinition utilizzare.
+	\item \textbf{securityDefinitions}: Vengono qui definiti i meccanismi di sicurezza che possono poi essere utilizzati in security.
+	\item \textbf{modules}: Questo campo non è originariamente presente nelle specifiche del Thing Descriptor. Si tratta di un campo ulteriore che fornisce indicazioni su quali moduli sono presenti all’interno di Edge e quali componenti sono compresi in questi ultimi.
+	\item \textbf{properties}: Contiene le interazioni che espongono lo stato di Edge, per esempio se una determinata luce è accesa oppure no.
+	Ogni property è composta da:
+	\begin{itemize}
+		\item \textbf{forms}: indicazioni su come effettuare la richiesta per ottenere un risultato.
+		\item \textbf{module}: Il nome modulo a cui appartiene la property. Questo campo non è presente da convenzione.
+		\item \textbf{type}: Il tipo del risultato.
+	\end{itemize}
+	\item \textbf{actions}: Contiene le interazioni che permettono di effettuare operazioni sullo stato di Edge. Ogni action è composta da:
+	\begin{itemize}
+		\item \textbf{forms}: indicazioni su come effettuare la richiesta per ottenere un risultato.
+		\item \textbf{module}: Il nome modulo a cui appartiene la action. Questo campo non è presente da convenzione.
+		\item \textbf{output}: Campo utilizzato per contenere a sua volta il tipo del risultati e altre informazioni sull’output.
+		\item \textbf{input}: Campo utilizzato per contenere informazioni sull’input.
+	\end{itemize}
+\end{itemize}
+Il Thing Descriptor risultante sarebbe molto simile al seguente:
+\begin{minted}{json}
+{
+	"@context": "https://www.w3.org/2019/wot/td/v1",
+	"id": "http://IP_ADDRESS:PORT",
+	"title": "Mock Title",
+	"security": ["no_sec"],
+	"securityDefinitions": {
+		"no_sec": {
+			"in": "header", "scheme": "nosec"
+		}
+	},
+	"modules": [{
+		"components": ["G","R"], "module": "light"
+	}],
+	"properties": {
+		"isOn-G": {
+			"forms": [{
+				"contentType": "application/json",
+				"href": "http://IP_ADDRESS:PORT/isOn?id=G"
+			}],
+			"module": "light", "type": "boolean"
+		},
+		"isOn-R": {
+			"forms": [{
+				"contentType": "application/json",
+				"href": "http://IP_ADDRESS:PORT/isOn?id=R"
+			}],
+			"module": "light", "type": "boolean"
+		}
+	},
+	"actions": {
+		"turnOff-G": {
+			"forms": [{
+				"contentType": "application/json",
+				"href": "http://IP_ADDRESS:PORT/turnOff?id=G"
+			}],
+			"module": "light", "output": {"type": "string"}
+		},
+		"turnOff-R": {
+			"forms": [{
+				"contentType": "application/json",
+				"href": "http://IP_ADDRESS:PORT/turnOff?id=R"
+			}],
+			"module": "light", "output": {"type": "string"}
+		},
+		"turnOn-G": {
+			"forms": [{
+				"contentType": "application/json",
+				"href": "http://IP_ADDRESS:PORT/turnOn?id=G"
+			}],
+			"module": "light", "output": {"type": "string"}
+		},
+		"turnOn-R": {
+			"forms": [{
+				"contentType": "application/json",
+				"href": "http://IP_ADDRESS:PORT/turnOn?id=R"
+			}],
+			"module": "light", "output": {"type": "string"}
+		}
+	}
+}
+\end{minted}
+
+\subsection{Ubiquitous Language}
+Viene di seguito illustrato come è stato definito l’Ubiquitous Language utilizzato nel sistema.
+
+\noindent Viene riportato il solo sottoinsieme di componenti di interesse per il progetto RDF. Verranno riportati in questa relazione solo alcuni dei concetti significativi, in quanto RDF è la tecnologia più adatta a modellare e definire l'Ubiquitous Language, ed è quindi possibile approfondire visionando il documento \textit{brittany.ttl}. Tra parentesi viene riportato il nome in italiano.
+
+\begin{itemize}
+	\item \textbf{Greenhouse (Serra)}: Una struttura artificiale suddiviso in \textit{ambienti} costruita appositamente per coltivare \textit{piante}.
+	\item \textbf{Environment (Ambiente)}: Sezione di una \textit{serra} che contiene più \textit{piante}. Una \textit{serra} è composta da almeno un \textit{ambiente}.
+	\item \textbf{Plant (Pianta)}: Unità vegetale contenuta all’interno di un \textit{ambiente} della \textit{serra}.
+	\item \textbf{Edge (Edge)}: Una macchina elettronica che colleziona dati da \textit{sensori} e che può manipolare degli \textit{attuatori}. Un \textit{Edge} è composto da \textit{moduli}. Un \textit{Edge} può essere posizionato in un \textit{ambiente} o su una \textit{pianta}.
+	\item \textbf{Module (Module)}: Un componente logico che può essere aggiunto ad un \textit{Edge} ed è composto da più \textit{Operation Handler}.
+	\item \textbf{Operation Handler (Operation Handler)}: Un'operazione che utilizza degli argomenti per della computazione e ritorna un risultato.
+	\item \textbf{Hardware Component (Componente Hardware)}: Un Componente Hardware che può essere utilizzato da un Operation Handler.
+\end{itemize}
