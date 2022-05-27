@@ -267,10 +267,41 @@ Vengono ora elencate tutte le restrizioni sulle cardinalità presenti in Brittan
 	\end{itemize}
 	\item \textbf{<\#ComponentHw>}:
 	\begin{itemize}
-		\item Esattamente un \textit{foaf:name};
+		\item Esattamente un \textit{foaf:name}.
 	\end{itemize}
 \end{itemize}
 \subsubsection{Valori}
+Vengono ora elencate tutte le restrizioni sui valori presenti in Brittany RDF:
+\begin{itemize}
+	\item \textbf{<\#DigitalLightModule>}:
+	\begin{itemize}
+		\item Ogni individuo ha una proprietà \textit{foaf:name} con valore \textit{"digital-light"};
+	\end{itemize}
+	\item \textbf{<\#IsOnDigitalLightHandler>}:
+		\begin{itemize}
+		\item Ogni individuo ha una proprietà \textit{foaf:name} con valore \textit{"isOn"};
+		\item Ogni individuo ha una proprietà \textit{<\#hasHandlerOutputType>} con valore \textit{"boolean"};
+	\end{itemize}
+	\item \textbf{<\#TurnOnDigitalLightHandler>}:
+	\begin{itemize}
+		\item Ogni individuo ha una proprietà \textit{foaf:name} con valore \textit{"turnOn"};
+		\item Ogni individuo ha una proprietà \textit{<\#hasHandlerOutputType>} con valore \textit{"string"};
+	\end{itemize}
+	\item \textbf{<\#TurnOffDigitalLightHandler>}:
+	\begin{itemize}
+		\item Ogni individuo ha una proprietà \textit{foaf:name} con valore \textit{"turnOff"};
+		\item Ogni individuo ha una proprietà \textit{<\#hasHandlerOutputType>} con valore \textit{"string"};
+	\end{itemize}
+	\item \textbf{<\#BrittanyThingDescriptor>}:
+	\begin{itemize}
+		\item Ogni individuo ha una proprietà \textit{td:definesSecurityScheme} con valore \textit{<\#nosec-schema>};
+		\item Ogni individuo ha una proprietà \textit{td:hasSecurityConfiguration} con valore \textit{<\#no-sec>};
+	\end{itemize}
+	\item \textbf{<\#BrittanyForm>}:
+	\begin{itemize}
+		\item Ogni individuo ha una proprietà \textit{hctl:forContentType} con valore \textit{"application/json"}.
+	\end{itemize}
+\end{itemize}
 \subsection{Osservazioni aggiuntive}
 \subsubsection{Design del Thing Descriptor}
 Il Thing Descriptor è stato pensato per essere utilizzato principalmente in formato JSON-LD. Il funzionamento non subisce nessun tipo di impatto se cambia anche il tipo di codifica, in quanto è sempre possibile un'operazione di conversione. È però fondamentale che la struttura del Thing Descriptor rimanga invariata. I nomi delle proprietà utilizzate sono mantenute nella W3 Thing Descriptor Ontology~\cite{ThingDes54:online}.\newline
