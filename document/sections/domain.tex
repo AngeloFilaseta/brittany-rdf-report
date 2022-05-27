@@ -1,7 +1,8 @@
-\section{Descrizione del dominio di "Brittany"}
+\section{Brittany}
+In questa sezione vengono riportate alcune informazioni che descrivono sommariamente come funziona il sistema "Brittany". La documentazione completa è consultabile al link \url{https://tale152.github.io/brittany/}~\cite{Brittany65:online}.\newline
+In questo report verranno citate solo alcune delle informazioni più importanti atte a far capire perché nel progetto "Brittany RDF" sono state prese certe decisione a discapito di altre.
 
 \subsection{Scope del progetto}
-
 Brittany è un sistema di serre il cui scopo è automatizzare il più possibile i processi di crescita di alcune piante.
 
 \noindent Il sistema è composto da dispositivi edge che monitorano la situazione delle piante e dell'ambiente circostante (tramite sensori) ed eventualmente vi agiscono (tramite attuatori). Ogni edge dispone di funzionalità che dipendono dall'hardware a cui essi sono collegati.
@@ -9,6 +10,7 @@ I dati che vengono campionati vengono raccolti in una base di dati. Gli utenti p
 
 \subsection{Descrizione ad alto livello del sistema}
 Brittany è un sistema suddiviso in micro servizi:
+\centeredImage{img/architecture.png}{Architettura del sistema "Brittany"}{0.7}
 \begin{itemize}
 	\item \textbf{Edge}: Si tratta del componente che manipola i sensori e gli attuatori all’interno degli ambienti della serra. In un ambiente possono esserci più Edge;
 	\item \textbf{Greenhouse Core}: Si tratta di un ambiente in cui degli agenti hanno un loro lifecycle, agiscono sugli Edge e contattano i Service qualora necessario.
@@ -18,14 +20,6 @@ Brittany è un sistema suddiviso in micro servizi:
 	\item \textbf{Web Client}: Il servizio che offre possibilità ad un client di interagire con il sistema.
 \end{itemize}
 Greenhouse core deve necessariamente essere collocato nella stessa rete LAN in cui si trovano gli apparecchi di tipo Edge.
-
-\centeredImage{img/architecture.png}{Architettura del sistema "Brittany"}{0.7}
-
-\subsubsection{Parte del dominio presa in considerazione per Brittany RDF}
-\noindent La parte del dominio che è interessante da rappresentare e formalizzare è quella inerente ai dispositivi di tipo "Edge". Si tratta della parte del sistema più Core e dunque più ricca di concetti. \newline
-Anche i parametri di configurazione di cui si occupa "Settings Service" sarebbero stati interessanti, ma sono già stati modellati accuratamente utilizzando altre tecnologie e sono stati quindi per ora esclusi.
-
-\centeredImage{img/represent.png}{Parte del sistema "Brittany" presa in considerazione per il progetto corrente}{0.7}
 
 \subsection{Interazione con Edge: Thing Descriptor}
 Un Thing Descriptor (TD, o W3C WoT Thing Descriptor) è un modello di rappresentazione royalty-free basato sul linguaggio JSON ed utilizzato nell Internet of Things (IoT). Il TD fornisce un modo univoco per descrive un oggetto o un servizio, in funzione delle sue capacità, dei protocolli che usa, ed altri metadati. Usare un Thing Descriptor semplifica notevolmente l’integrazione di dispositivi IoT all’interno di sistemi che ne fanno uso. Ogni Edge dispone di un sistema di generazione del TD automatico in base alla configurazione che possiede.
