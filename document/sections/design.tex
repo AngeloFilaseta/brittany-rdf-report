@@ -241,3 +241,12 @@ Sono stati realizzati degli individui di esempio:\newline
 La differenza è che gli handler \textit{<\#angelo-..>} hanno due individui di tipo \textit{<\#DigitalLightHw>} collegati (\textit{<\#angelo-digital-light-sx>} e \textit{<\#angelo-digital-light-sx>}) mentre quelli \textit{<\#giorgia-..>} ne hanno solo uno (\textit{<\#giorgia-digital-light-center>}).\newline
 
 \noindent Infine entrambi gli individui di tipo \textit{<\#Edge>} sono collegati ad un individuo di tipo \textit{<\#BrittanyThingDescriptor>}, rispettivamente \textit{<\#angelo-td-mock-ip>} e \textit{<\#giorgia-td-mock-ip>} le cui ActionAffordance e PropertyAffordance sono mappate con quelle di tutti gli Operation Handler di tutti i Moduli posseduti.
+
+\subsection{Osservazioni aggiuntive}
+\subsubsection{Design del Thing Descriptor}
+Il Thing Descriptor è stato pensato per essere utilizzato principalmente in formato JSON-LD. Il funzionamento non subisce nessun tipo di impatto se cambia anche il tipo di codifica, in quanto è sempre possibile un'operazione di conversione. È però fondamentale che la struttura del Thing Descriptor rimanga invariata. I nomi delle proprietà utilizzate sono mantenute nella W3 Thing Descriptor Ontology~\cite{ThingDes54:online}.\newline
+\noindent Esistono tuttavia degli elementi che non è necessario aggiungere alla nuova implementazioni di Thing Descriptor. Rispetto alla versione illustrata nella sottosezione \ref{tdform} non è più necessario aggiungere il campo \textit{"modules"}, ed è anche possibile rimuovere tutti i campi "module" in ogni Interaction Affordance.\newline
+Utilizzando RDF è ora possibile risalire a queste informazioni a partire dalle informazioni già contenute nel TD.
+\begin{warn}
+	È però necessario assumere che nella versione finale ed integrata del sistema Brittany questi dati saranno accessibili e utilizzabili in qualche modo dal microservizio \textit{"Greenhouse Core"}.
+\end{warn}
