@@ -1,0 +1,21 @@
+\section{Conclusioni}
+\subsection{Sviluppi futuri}
+Questa ontologia non viene al momento utilizzata dal sistema "Brittany". Per poterne fare uso occorrerebbe un processo di integrazione dei due progetti, soprattutto con il micro servizio \textit{Edge}, che fra tutti risulta anche il sottoprogetto con la tecnologia più di basso livello. Edge infatti è stato scritto utilizzando il linguaggio C++. Il relativo codice sorgente inoltre deve rispettare certi standard, in quanto non tutte le funzionalità offerte da librerie esterne sono compatibili coi microcontrollori utilizzati. Tutti questi elementi fanno presagire come il processo di integrazione non è semplice e richiede approfondimenti.\newline\newline
+\noindent La generazione semi-automatica del Thing Descriptor risulta essere uno degli aspetti più interessanti di questo progetto. Anche il codice sorgente che viene attualmente utilizzato all'interno di Edge per quanto riguarda la generazione del Thing Descriptor risulta piuttosto complicato da capire, testare e modificare, nonostante i buoni pattern di progettazione adottati.\newline
+Attualmente la generazione del Thing Descriptor avviene grazie ad un componente denominato ThingDescriptorBuilder, che in input richiede tutte le caratteristiche del dispositivo. Il metodo \textit{build()} è un template method che contiene un flusso di istruzioni ognuna delle quali è atta a generare una parte del Thing Descriptor finale. Nonostante questa forte divisione il codice non risulta essere molto comprensibile.
+\begin{info}[Esempio]
+	\begin{minted}{c}
+Json::Value object;
+object["module"] = m -> name();
+object["forms"][0]["href"] =
+	"http://" + ip + ":" + std::to_string(port) + h -> path() + "?id=" + c.id();
+object["forms"][0]["contentType"] = "application/json";
+std::string objectName;
+std::string name = h -> name() + "-" + c.id();
+std::string type = type_to_string(h -> outputType());
+	\end{minted}
+
+\noindent Come si può facilmente intuire, lavorare a questo livello non fornisce indicazioni chiare sul risultato finale. Persino generare i test richiede molta concentrazione e sono possibili errori anche solo per qualche carattere sbagliato.
+\end{info}
+
+\noindent Un processo di analisi potrebbe fornire in output dei metodi più efficaci ed efficienti per la generazione del TD, grazie anche all'utilizzo di questa ontologia.\newline
