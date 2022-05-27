@@ -242,6 +242,35 @@ La differenza è che gli handler \textit{<\#angelo-..>} hanno due individui di t
 
 \noindent Infine entrambi gli individui di tipo \textit{<\#Edge>} sono collegati ad un individuo di tipo \textit{<\#BrittanyThingDescriptor>}, rispettivamente \textit{<\#angelo-td-mock-ip>} e \textit{<\#giorgia-td-mock-ip>} le cui ActionAffordance e PropertyAffordance sono mappate con quelle di tutti gli Operation Handler di tutti i Moduli posseduti.
 
+\subsection{Restrizioni}
+\subsubsection{Cardinalità}
+Vengono ora elencate tutte le restrizioni sulle cardinalità presenti in Brittany RDF:
+\begin{itemize}
+	\item \textbf{<\#Greenhouse>}:
+	\begin{itemize}
+		\item Esattamente un \textit{foaf:name};
+		\item Almeno un \textit{<\#Environment>} legato attraverso la proprietà \textit{<\#hasEnvironment>};
+	\end{itemize}
+	\item \textbf{<\#Edge>}:
+	\begin{itemize}
+		\item Esattamente un \textit{<\#BrittanyThingDescriptor>} legato attraverso la proprietà \textit{<\#hasThingDescriptor>};
+		\item Almeno un \textit{<\#Module>} legato attraverso la proprietà \textit{<\#hasModule>};
+	\end{itemize}
+	\item \textbf{<\#Module>}:
+	\begin{itemize}
+		\item Esattamente un \textit{foaf:name};
+		\item Almeno un \textit{<\#OperationHandler>} legato attraverso la proprietà \textit{<\#hasHandler>};
+	\end{itemize}
+	\item \textbf{<\#OperationHandler>}:
+	\begin{itemize}
+		\item Esattamente un \textit{foaf:name};
+	\end{itemize}
+	\item \textbf{<\#ComponentHw>}:
+	\begin{itemize}
+		\item Esattamente un \textit{foaf:name};
+	\end{itemize}
+\end{itemize}
+\subsubsection{Valori}
 \subsection{Osservazioni aggiuntive}
 \subsubsection{Design del Thing Descriptor}
 Il Thing Descriptor è stato pensato per essere utilizzato principalmente in formato JSON-LD. Il funzionamento non subisce nessun tipo di impatto se cambia anche il tipo di codifica, in quanto è sempre possibile un'operazione di conversione. È però fondamentale che la struttura del Thing Descriptor rimanga invariata. I nomi delle proprietà utilizzate sono mantenute nella W3 Thing Descriptor Ontology~\cite{ThingDes54:online}.\newline
