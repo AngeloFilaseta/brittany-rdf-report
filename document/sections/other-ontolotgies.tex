@@ -44,30 +44,31 @@ foaf:name "Angelo's Greenhouse" .
 \subsection{Hypermedia Controls Ontology}
 Un'ontologia utilizzata per link, form e contenuti multimediali nel Web~\cite{Hypermed84:online}.
 
-\noindent Questa ontologia viene utilizzata per specificare il percorso di azioni e proprietà nel Thing Descriptor:
+\noindent Questa ontologia viene utilizzata per specificare alcune proprietà delle InteractionAffordance contenute nel Thing Descriptor. In particolare viene utilizzata per specificare il tipo di contenuto che viene scambiato durante la connessione e a quale path è presente l'interazione:
 \begin{minted}{turtle}
 @prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
 
-<#turn-off-digital-light-sx>
+<#angelo-action-turn-off-digital-light-sx>
 	td:hasForm [
 		hctl:forContentType "application/json" ;
-		hctl:hasTarget "td-mock-ip/turnOff?id=digital-light-sx"
+		hctl:hasTarget "angelo-td-mock-ip/turnOff?id=angelo-digital-light-sx"
 	] ;
 \end{minted}
 
 \subsection{JSON Schema}
 Un vocabolario che contiene standard per la struttura di oggetti JSON~\cite{JSONSche6:online}.
 
-\noindent Alcune caratteristiche degli Operation Handler come la struttura dei dati di input e di output sono rappresentati utilizzando alcuni di questi elementi:
+Questa ontologia è utile per specificare i tipi all'interno delle InteractionAffordance del Thing Descriptor.\newline
+\noindent Anche alcune caratteristiche degli Operation Handler come la struttura dei dati di input e di output sono rappresentati utilizzando alcuni di questi elementi:
 \begin{minted}{turtle}
 @prefix jsonschema: <https://www.w3.org/2019/wot/json-schema#> .
 
-<#turn-off-digital-light-sx>
+<#angelo-action-turn-off-digital-light-sx>
 td:hasOutputSchema [ a jsonschema:StringSchema ] .
 \end{minted}
-\noindent In questo caso si specifica che il tipo di output di questo handler è di tipo stringa. Sarebbe stato possibile utilizzare direttamente un tipo di dato diverso e più semplice, ma grazie a JSON Schema è possibile fornire una descrizione più accurata di quali range di valori sono possibili.
-
-\noindent JSON Schema è stata scelta perché utilizzato anche per specificare le strutture dai dati nelle azioni e nelle proprietà del Thing Descriptor.
+\noindent In questo caso si specifica che il tipo di output di questa azione è di tipo stringa.\newline
+\noindent Per gli Operation Handler sarebbe stato possibile utilizzare direttamente un tipo di dato diverso e più semplice, ma grazie a JSON Schema è possibile fornire da subito una descrizione più accurata di quali range di valori sono possibili.\newline
+\noindent Inoltre il processo di inferenza risulta molto più semplice rimanendo consistenti ed utilizzando sempre le stesse classi.\newline
 
 \subsection{Machine-to-Machine Measurement (M3)}
 L'ontologia Machine-to-Machine Measurement (M3) è un linguaggio unificato, un dizionario ricco di nomenclature utili per identificare concetti nel dominio dell'IoT (Sensors, RFID tags, etc.)~\cite{SWoTSema18:online}.
@@ -100,15 +101,16 @@ Un Thing Descriptor (TD, o W3C WoT Thing Descriptor) è un modello di rappresent
 \begin{minted}{turtle}
 @prefix td: <https://www.w3.org/2019/wot/td#> .
 
-<#td-mock-ip>
-a td:Thing ;
+<#angelo-td-mock-ip>
+a <#BrittanyThingDescriptor> ;
+foaf:name "angelo-td-mock-ip" ;
 td:title "Angelo's ESP8266 TD" ;
-td:definesSecurityScheme <nosec-schema> ;
-td:hasSecurityConfiguration <#no-sec> ;
-td:hasActionAffordance
-<#turn-off-digital-light-sx>, <#turn-off-digital-light-dx>,
-<#turn-on-digital-light-sx>, <#turn-on-digital-light-dx> ;
-td:hasPropertyAffordance <#is-on-digital-light-sx>, <#is-on-digital-light-dx> .
+td:hasActionAffordance <#angelo-action-turn-off-digital-light-sx>,
+                       <#angelo-action-turn-off-digital-light-dx>,
+                       <#angelo-action-turn-on-digital-light-sx>,
+                       <#angelo-action-turn-on-digital-light-dx> ;
+td:hasPropertyAffordance <#angelo-property-is-on-digital-light-sx>,
+                         <#angelo-property-is-on-digital-light-dx> .
 \end{minted}
 \subsection{Web of Things (WoT) Security Ontology}
 Questa ontologia contiene concetti utilizzati per definire il tipo di sicurezza utilizzato all'interno del Thing Descriptor~\cite{WebofThi54:online}.
