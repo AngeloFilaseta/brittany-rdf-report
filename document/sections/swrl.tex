@@ -118,3 +118,54 @@ isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, "null") ^
 swrlx:makeOWLThing(?i, ?a)
 	-> jsonschema:NullSchema(?i) ^ td:hasOutputSchema(?a, ?i)
 \end{minted}
+
+\subsection{Generazione automatica del Form delle Interaction Affordance}
+Ogni Interaction Affordance nel Thing Descriptor possiede un form nella seguente forma:
+\begin{minted}{turtle}
+[
+	a td:Form ;
+	hctl:forContentType "application/json" ;
+	hctl:hasTarget "[EDGE_IP]/[HANDLER_NAME]?id=[COMPONENT_NAME]".
+]
+\end{minted}
+La proprietà \textit{hctl:forContentType} applica correttamente il valore \textit{"application/json"} ad ogni individuo del tipo \textit{<\#BrittanyForm>} grazie ad una \textit{owl:Restriction} di tipo \textit{owl:hasValue}.\newline
+\noindent Il passo rimanente è la generazione del valore corretto del target, ovvero l'indirizzo verso cui vengono effettuate le richieste. Si tratta di un elemento molto variabile che dipende da:
+\begin{enumerate}
+	\item L'indirizzo IP che acquisisce il dispositivo Edge;
+	\item Il nome dell'Operation Handler utilizzato dalla Interaction Affordance;
+	\item Il nome del componente su cui l'Interaction Affordance agisce.
+\end{enumerate}
+
+\subsubsection{swrl-td-form-generation}
+La regola, utilizzando una sintassi human readable, ha la seuente forma:
+
+\begin{minted}{c}
+isInteractionAffordanceOf(?ia, ?td) ^ foaf:name(?td, ?ip) ^
+isInteractionAffordanceOfHandler(?ia, ?h3) ^ foaf:name(?h3, ?hn) ^
+interactsWithComponentHw(?ia, ?c) ^ foaf:name(?c, ?cn) ^
+swrlb:stringConcat(?fullText, ?ip, "/", ?hn, "?id=", ?cn) ^
+swrlx:makeOWLThing(?form, ?ia)
+	-> BrittanyForm(?form) ^ hctl:hasTarget(?form, ?fullText) ^
+	   td:hasForm(?td, ?form)
+\end{minted}
+In ordine questa regola SWRL effettua le seguenti computazioni:
+\begin{enumerate}
+	\item Per ogni InteractionAffordance viene recuperato il Thing Descriptor a cui è legata, in modo da estrapolare l'indirizzo IP del dispositivo Edge;
+	\item Viene recuperato l'Operation Handler legato alla InteractionAffordance, in modo da estrapolare il nome;
+	\item Viene recuperato il Componente Hardware con cui l'InteractionAffordance interagisce, in modo da recuperarne il nome;
+	\item Con le informazioni recuperate (indirizzo IP, nome dell'Operation Handler, nome del Componente Hardware) viene costruita una stringa che definisce in modo univoco il percorso dell'InteractionAffordance. Per farlo è stato utilizzato il built-in \textit{swrlb:stringConcat}~\cite{BuiltIns80:online};
+	\item Viene creato un nuovo individuo per ogni InteractionAffordance utilizzando di nuovo il built-in \textit{swrlx:makeOWLThing};
+	\item Ogni nuovo individuo creato viene tipizzato a \textit{<\#BrittanyForm>}, al quale viene aggiunto l'indirizzo generato attraverso la proprietà \textit{hctl:hasTarget}. Il form viene poi legato al Thing Descriptor attraverso la proprietà \textit{td:hasForm}
+\end{enumerate}
+Segue la lista delle variabili SWRL utilizzate per una maggior chiarezza:
+\begin{itemize}
+	\item \textbf{?ia}: Un individuo di tipo InteractionAffordance. Sono incluse sia le ActionAffordance che le PropertyAffordance. Essendo la forma del Form sempre la stessa non è necessaria una suddivisione in più regole.
+	\item \textbf{?td}: Il Thing Descriptor a cui è legata la InteractionAffordance.
+	\item \textbf{?ip}: L'indirizzo IP che è stata assegnato al dispositivo Edge;
+	\item \textbf{?h3}: L'Operation Handler a cui la InteractionAffordance è legata.
+	\item \textbf{?hn}: Il nome dell'Operation Handler a cui la InteractionAffordance è legata.
+	\item \textbf{?c}: Il Componente Hardware con cui la InteractionAffordance interagisce.
+	\item \textbf{?cn}: Il nome del Componente Hardware con cui la InteractionAffordance interagisce.
+	\item \textbf{?form}: Il Form generato.
+	\item \textbf{?fullText}: Il test completo dell'indirizzo generato.
+\end{itemize}
